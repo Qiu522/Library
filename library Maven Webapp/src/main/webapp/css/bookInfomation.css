@@ -1,0 +1,46 @@
+.book-information {
+  display: flex;
+  flex-direction: row;
+}
+.bookInfo-img {
+}
+.bookInfo-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding:1em;
+  padding-right: 2em;
+}
+.bookInfo-content .title {
+  display: flex; 
+  flex-direction: row;
+  align-items: flex-end;
+  margin-bottom: 1em;
+}
+.bookInfo-content .title h2 {
+  margin-right: 0.5em;
+}
+.bookInfo-content .category span {
+  padding: 0 0.5em;
+  border: 1px solid #ffb0b4;
+  border-radius: 0.5em;
+  transition: border .3s;
+  color: #bf2c24;
+}
+.bookInfo-content .describe {
+  margin-top: 1em;
+  flex: 1;
+  
+}
+.bookInfo-content .info {
+  display: flex;
+  flex-direction: row;
+}
+.bookInfo-content .info i {
+  color: #bf2c24;
+}
+.bookInfo-content .lend a {
+  display: inline-flex;
+  padding: 0.5em 1em;
+  background: #ffb0b4;
+}
