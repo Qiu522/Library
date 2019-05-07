@@ -29,14 +29,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!--webfont-->
-	<link href='http://fonts.useso.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-	 <script type="text/javascript">
-		jQuery(document).ready(function($) {
-			$(".scroll").click(function(event){		
-				event.preventDefault();
-				$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
-			});
+  <script src="js/init.js"></script>
+  <script type="text/javascript">
+  var baseUrl='${pageContext.request.contextPath}';
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){		
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
 		});
+		var pid = GetQueryString("pid");
+		console.log(pid);
+		getCategory(baseUrl, pid);
+		
+	});
+		
+		
 	</script>
   </head>
   
@@ -75,14 +82,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 					<span class="menu"></span>
 					<div class="top-menu">
-						<ul>
-							<li><a href="#">文学</a></li>
+						<ul class="category">
+							<!-- <li><a href="#">文学</a></li>
 							<li><a href="#">青春</a></li>
 							<li><a class="#" href="blog.html">传记</a></li>
 							<li><a href="#">悬疑</a></li>
 							<li><a href="#">科幻</a></li>
 							<li><a href="#">影视</a></li>
-							<div class="#"></div>
+							<div class="#"></div> -->
 						</ul>
 					</div>
 					<!-- script for menu -->

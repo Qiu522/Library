@@ -29,7 +29,6 @@ public class getCategoryList {
 		List<Category> list = null;
 		try {
 			list = categoryService.queryCategory(pid);
-			System.out.println();
         } catch (Exception e) {
             e.printStackTrace();
         }

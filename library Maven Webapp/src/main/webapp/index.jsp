@@ -30,44 +30,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!--webfont-->
-<link href='http://fonts.useso.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		$(".scroll").click(function(event){		
-			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
-		});
-		
-		var data = '{"name": "jjj", "description": "", "pid": "0" }';
-		
-		console.log(JSON.stringify(data));
-		var pid = 0;
-		$.ajax({
-						type: "post",
-            url: "${pageContext.request.contextPath }/aaa.action?pid=" + pid,
-            data: null,
-            contentType: "application/json;charset=UTF-8", //发送数据的格式
-            dataType: "json", //这是返回来是json，也就是回调json
-            success: function(data){
-            	createCategory(data);
-            }
-        });
-        
-     
+<!-- <link href='http://fonts.useso.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'> -->
+<script src="js/init.js"></script>
+<script>
+var baseUrl='${pageContext.request.contextPath}';
+var pid = 0;
+jQuery(document).ready(function($) {
+	$(".scroll").click(function(event){		
+		event.preventDefault();
+		$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
 	});
 	
-   let createCategory =  (data) => {
-   		var oUl = document.querySelector(".category");
-   		for(var i = 0; i < data.length; i++){
-     		var oLi = `<li><a href="bookCategory.action">\${data[i].name}</a></li>`;
-     		console.log(oUl);
-     		oUl.innerHTML += oLi; 
-     	}
-   }
+	getCategory(baseUrl, pid)
+	
+});
 </script>
 
 </head>
-
 <body>
 	<!-- header-section-starts -->
 	<div class="header" id="header">
