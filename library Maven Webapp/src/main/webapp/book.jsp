@@ -45,7 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="header" id="header">
 			<div class="container">
 				<div class="logo">
-					<a href="index.html"><img src="images/logo-l.png" alt="" /></a>
+					<a href="index.jsp"><img src="images/logo-l.png" alt="" /></a>
 				</div>
 				<div class="social-icons header-social-icons">
 					<a href="#"><i class="twitter"></i></a>
@@ -65,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="container">
 				<div class="nav_content">
 				<div class="home">
-						<a href="index.html"><img src="images/home1.png" alt="" /></a>
+						<a href="index.jsp"><img src="images/home1.png" alt="" /></a>
 					</div>
 					<div class="search">
 						<form>

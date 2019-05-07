@@ -59,7 +59,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
    let createCategory =  (data) => {
    		var oUl = document.querySelector(".category");
    		for(var i = 0; i < data.length; i++){
-     		var oLi = `<li><a href="book.jsp">\${data[i].name}</a></li>`;
+     		var oLi = `<li><a href="bookCategory.action">\${data[i].name}</a></li>`;
      		console.log(oUl);
      		oUl.innerHTML += oLi; 
      	}
@@ -73,7 +73,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="header" id="header">
 		<div class="container">
 			<div class="logo">
-				<a href="index.html"><img src="images/logo-l.png" alt="" /></a>
+				<a href="index.jsp"><img src="images/logo-l.png" alt="" /></a>
 			</div>
 			<div class="social-icons header-social-icons">
 				<a href="#"><i class="twitter"></i></a>
@@ -93,7 +93,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="container">
 			<div class="nav_content">
 				<div class="home">
-					<a href="index.html"><img src="images/home.png" alt="" /></a>
+					<a href="index.jsp"><img src="images/home.png" alt="" /></a>
 				</div>
 				<div class="search">
 					<form>

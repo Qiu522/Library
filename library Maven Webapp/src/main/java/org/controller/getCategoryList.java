@@ -22,7 +22,7 @@ public class getCategoryList {
     private CategoryService categoryService;
 	
 	
-	@RequestMapping(value="/aaa.action")
+	@RequestMapping("/getCategory.action")
     public @ResponseBody List<Category> hello(HttpServletRequest request) {
 		
 		int pid = Integer.parseInt( request.getParameter("pid") );
@@ -33,9 +33,6 @@ public class getCategoryList {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        
-        //System.out.println("pid为：" + pid);
         
         return list;
      }
