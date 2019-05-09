@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dao.BookDao">
+	
+	<resultMap type="org.model.Book" id="testResultMap">
+        <!-- id用来配置表的主键与类的属性的映射关系 ,column指定的是表的字段名； property指定的是类的属性名-->
+        <id column="id" property="id"/>
+        <!-- result用来配置 普通字段与类的属性的映射关系 ,column指定的是表的字段名； property指定的是类的属性名-->
+        <result column="title" property="title"/>
+        <result column="describe" property="describe"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="sImg_url" property="simgUrl"/>
+        <result column="bImg_url" property="bimgUrl"/>
+        <result column="include_date" property="includeDate"/>
+        <result column="total" property="total"/>
+        <result column="remain" property="remain"/>
+        <result column="publish_date" property="publishDate"/>
+        <result column="publisher" property="publisher"/>
+        <result column="lendable" property="lendable"/>
+        <result column="site" property="site"/>
+        <result column="lend_count" property="lendCount"/>
+        <result column="book_author_id" property="bookAuthorId"/>
+  </resultMap>
+	
+	<select id="queryHotBooks" resultMap="testResultMap" fetchSize="9">
+		select * from book order by lend_count desc limit 9;
+	</select>
+
+</mapper>

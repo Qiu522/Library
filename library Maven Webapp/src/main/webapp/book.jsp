@@ -38,8 +38,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
 		});
 		var pid = GetQueryString("pid");
-		console.log(pid);
-		getCategory(baseUrl, pid);
+			console.log(pid);
+			getCategory(baseUrl, pid);
 		
 	});
 		

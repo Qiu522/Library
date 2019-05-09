@@ -43,6 +43,14 @@ jQuery(document).ready(function($) {
 	
 	getCategory(baseUrl, pid)
 	
+	
+	
+	getHotBook(baseUrl);
+	
+	/* var hotBookDiv = document.querySelector(".exhibit-post-grids");
+	var bookCols = hotBookDiv.querySelectorAll(".exhibit-posts"); */
+	
+	//console.log(bookCols[1].offsetHeight)
 });
 </script>
 
@@ -216,53 +224,13 @@ jQuery(document).ready(function($) {
 				<h4 class="head">热门图书<span class="line"></span></h4>		
 				<div class="exhibit-post-grids">
 					<div class="col-md-4 exhibit-posts">
-						<div class="exhibit-post">
-							<div class="exhibit-img"><a href="#"><img src="images/book2.jpg"></a></div>
-							<a href="#" class="exhibit-title">人间失格</a>
-							<p class="sub_head">作者为： <a href="#">太宰治</a> on 12/04/2014</p>
-							<span></span>
-							<p>人间失格，即丧失为人的资格。由序、第一手札、第二手札、第三手札、后记共五个部分构成，其中序和后记以作者口吻叙说，三个手札则以主人公叶藏的口吻叙述。主人公叶藏胆小懦弱，惧怕世间的情感，不了解人类复杂的思想，继而通过搞笑取乐别人，隐藏真实的自己。后来发现饮酒作乐似乎更能逃避这个世界，于是终日放浪形骸，通过酒精、药物、女人来麻痹自己，最终走向毁灭。他被身为人真切的痛苦所折磨，终其一生都在自我厌倦下寻求爱，逃避爱，最后只能毁灭自己。</p>
-						</div>	
-						<div class="exhibit-post">
-							<a href="single.html"><img src="images/b2.jpg"></a>
-							<a href="single.html" class="exhibit-title">This is blog post title</a>
-							<p class="sub_head">Posted by <a href="#">Admin</a> on 12/04/2014</p>
-							<span></span>
-							<p>Fusce placerat bibendum augue, non posuere lorem facilisis sit amet. Mauris malesuada nunc eget est pellentesque sit amet aliquet dolor pharetra. Integer placerat elit quis nisl dignissim non consectetur quam vestibulum. Suspendisse tincidunt adipiscing magna, ut dapibus nulla varius nec. Proin mi dolor, dapibus nec congue posuere, ornare sit.</p>
-            </div>
-            	
+						
 					</div>
 					<div class="col-md-4 exhibit-posts">
-						<div class="exhibit-post">
-							<a href="single.html"><img src="images/b3.jpg"></a>
-							<a href="single.html" class="exhibit-title">This is blog post title</a>
-							<p class="sub_head">Posted by <a href="#">Admin</a> on 12/04/2014</p>
-							<span></span>
-							<p>Phasellus in tincidunt velit. Etiam fermentum fringilla tristique. Aenean posuere aliquam interdum. Sed dignissim turpis eget leo ultricies ultricies. </p>
-						</div>	
-						<div class="exhibit-post">
-							<a href="single.html"><img src="images/b1.jpg"></a>
-							<a href="single.html" class="exhibit-title">This is blog post title</a>
-							<p class="sub_head">Posted by <a href="#">Admin</a> on 12/04/2014</p>
-							<span></span>
-							<p>Phasellus in tincidunt velit. Etiam fermentum fringilla tristique. Aenean posuere aliquam interdum. Sed dignissim turpis eget leo ultricies ultricies. Sed et felis leo, eget dapibus massa. Etiam volutpat vehicula dolor, vel placerat odio posuere non.</p>
-						</div>	
+						
 					</div>
 					<div class="col-md-4 exhibit-posts span_66">
-						<div class="exhibit-post">
-							<a href="single.html"><img src="images/b2.jpg"></a>
-							<a href="single.html" class="exhibit-title">This is blog post title</a>
-							<p class="sub_head">Posted by <a href="#">Admin</a> on 12/04/2014</p>
-							<span></span>
-							<p>Fusce placerat bibendum augue, non posuere lorem facilisis sit amet. Mauris malesuada nunc eget est pellentesque sit amet aliquet dolor pharetra. Integer placerat elit quis nisl dignissim non consectetur quam vestibulum. Suspendisse tincidunt adipiscing magna, ut dapibus nulla varius nec. Proin mi dolor, dapibus nec congue posuere, ornare sit. </p>
-						</div>	
-						<div class="exhibit-post">
-							<a href="single.html"><img src="images/b3.jpg"></a>
-							<a href="single.html" class="exhibit-title">This is blog post title</a>
-							<p class="sub_head">Posted by <a href="#">Admin</a> on 12/04/2014</p>
-							<span></span>
-							<p>Phasellus in tincidunt velit. Etiam fermentum fringilla tristique. Aenean posuere aliquam interdum. Sed dignissim turpis eget leo ultricies ultricies. </p>
-						</div>	
+						
 					</div>
 					<div class="clearfix"></div>
 				</div>
