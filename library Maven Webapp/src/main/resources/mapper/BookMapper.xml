@@ -22,8 +22,12 @@
         <result column="book_author_id" property="bookAuthorId"/>
   </resultMap>
 	
-	<select id="queryHotBooks" resultMap="testResultMap" fetchSize="9">
-		select * from book order by lend_count desc limit 9;
+	<select id="queryOneBook" resultMap="testResultMap">
+		select * from book where id = #{id}
+	</select>
+	
+	<select id="queryHotBooks" resultMap="testResultMap">
+		select * from book order by #{columnName} desc limit #{limit};
 	</select>
 
 </mapper>

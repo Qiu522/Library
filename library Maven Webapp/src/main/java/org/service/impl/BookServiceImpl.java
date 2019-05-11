@@ -15,9 +15,14 @@ public class BookServiceImpl implements BookService{
 	private BookDao bookDao;
 	
 	@Override
-	public List<Book> queryHotBooks() {
-		// TODO Auto-generated method stub
-		return bookDao.queryHotBooks();
+	public Book queryOneBook(int id) {
+		return bookDao.queryOneBook(id);
 	}
+	
+	@Override
+	public List<Book> queryHotBooks(String columnName, int limit) {
+		return bookDao.queryHotBooks(columnName, limit);
+	}
+	
 	
 }

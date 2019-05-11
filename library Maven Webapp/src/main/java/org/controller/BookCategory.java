@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BookCategory {
 	@RequestMapping(value="/bookCategory.action")
 	public void gotoBook(HttpServletRequest request, HttpServletResponse response){
-		System.out.println(request.getParameter("pid"));
+		//System.out.println(request.getParameter("pid"));
 		int pid = Integer.parseInt( request.getParameter("pid") );
 		try {
 			response.sendRedirect("book.jsp?pid=" + pid );

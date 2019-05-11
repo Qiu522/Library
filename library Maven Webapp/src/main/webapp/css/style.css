@@ -196,8 +196,8 @@ i.rss:hover{
   width: 100%;
 }
 .project .book-post .book-content h3 {
-  margin-top: 0.5em;
-  font-size: 2em;
+  margin: 0.5em 0;
+  font-size: 1.3em;
 }
 
 h4.head {
@@ -241,7 +241,7 @@ a.exhibit-title {
 	color: #5e5e5e;
 	font-size: 1.2em;
 	font-weight: 600;
-	padding: 25px 0px 0px 16px;
+	padding: 25px 0px 4px 16px;
 	text-decoration:none;
 	display:block;
 }
@@ -257,7 +257,17 @@ a.exhibit-title {
 	font-size: 0.875em;
 	line-height:1.8em;
 	font-weight: 400;
-	padding:0 20px 15px 16px;
+  padding:0 20px 15px 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.exhibit-posts .sub_more{
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: flex-end;
+  padding: 0 2.5em 1em;
 }
 .exhibit-posts {
 	width: 32.4%;

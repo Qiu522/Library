@@ -31,6 +31,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!--webfont-->
 <!-- <link href='http://fonts.useso.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'> -->
+
 <script src="js/init.js"></script>
 <script>
 var baseUrl='${pageContext.request.contextPath}';
@@ -41,11 +42,10 @@ jQuery(document).ready(function($) {
 		$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
 	});
 	
-	getCategory(baseUrl, pid)
+	getCategory(baseUrl, pid);
+	getHotBooks(baseUrl);
+	getNewBook(baseUrl);
 	
-	
-	
-	getHotBook(baseUrl);
 	
 	/* var hotBookDiv = document.querySelector(".exhibit-post-grids");
 	var bookCols = hotBookDiv.querySelectorAll(".exhibit-posts"); */
@@ -117,9 +117,9 @@ jQuery(document).ready(function($) {
 	<div class="content">
 		<div class="container">
 			<div class="projects-section">
-				<h4 class="head">编辑推荐<span class="line"></span></h4>				
+				<h4 class="head">新书上线<span class="line"></span></h4>				
 				<div class="latest-projects">
-					<div class="col-md-3 project">
+					<!-- <div class="col-md-3 project">
             <div class="book-post">
                 <div class="book-img">
                   <a href="#"><img src="images/book1.jpg" alt="" /></a>
@@ -130,107 +130,18 @@ jQuery(document).ready(function($) {
                   <p>总借阅数：<span>50</span></p>
                 </div>
             </div>
-          </div>
-          <div class="col-md-3 project">
-            <div class="book-post">
-                <div class="book-img">
-                  <a href="#"><img src="//img14.360buyimg.com/n1/s200x200_jfs/t25927/352/2130181065/306447/5dbfe8ec/5bc43b47N47775123.jpg" alt="" /></a>
-                </div>
-                <div class="book-content">
-                  <h3 class="book-title"><a href="#">老人与海</a></h3>
-                  <p>作者：<span>海明威</span></p>
-                  <p>总借阅数：<span>50</span></p>
-                </div>
-            </div>
-          </div>
-          <div class="col-md-3 project">
-            <div class="book-post">
-                <div class="book-img">
-                  <a href="#"><img src="//img13.360buyimg.com/n1/s200x200_jfs/t10072/231/1597945576/58010/1512bd1b/59e35198N2e697952.jpg
-" alt="" /></a>
-                </div>
-                <div class="book-content">
-                  <h3 class="book-title"><a href="#">老人与海</a></h3>
-                  <p>作者：<span>海明威</span></p>
-                  <p>总借阅数：<span>50</span></p>
-                </div>
-            </div>
-          </div>
-          <div class="col-md-3 project">
-            <div class="book-post">
-                <div class="book-img">
-                  <a href="#"><img src="images/book1.jpg" alt="" /></a>
-                </div>
-                <div class="book-content">
-                  <h3 class="book-title"><a href="#">老人与海</a></h3>
-                  <p>作者：<span>海明威</span></p>
-                  <p>总借阅数：<span>50</span></p>
-                </div>
-            </div>
-          </div>
-          <div class="col-md-3 project">
-            <div class="book-post">
-                <div class="book-img">
-                  <a href="#"><img src="images/book1.jpg" alt="" /></a>
-                </div>
-                <div class="book-content">
-                  <h3 class="book-title"><a href="#">老人与海</a></h3>
-                  <p>作者：<span>海明威</span></p>
-                  <p>总借阅数：<span>50</span></p>
-                </div>
-            </div>
-          </div>
-          <div class="col-md-3 project">
-            <div class="book-post">
-                <div class="book-img">
-                  <a href="#"><img src="images/book1.jpg" alt="" /></a>
-                </div>
-                <div class="book-content">
-                  <h3 class="book-title"><a href="#">老人与海</a></h3>
-                  <p>作者：<span>海明威</span></p>
-                  <p>总借阅数：<span>50</span></p>
-                </div>
-            </div>
-          </div>
-          <div class="col-md-3 project">
-            <div class="book-post">
-                <div class="book-img">
-                  <a href="#"><img src="images/book1.jpg" alt="" /></a>
-                </div>
-                <div class="book-content">
-                  <h3 class="book-title"><a href="#">老人与海</a></h3>
-                  <p>作者：<span>海明威</span></p>
-                  <p>总借阅数：<span>50</span></p>
-                </div>
-            </div>
-          </div>
-          <div class="col-md-3 project">
-            <div class="book-post">
-                <div class="book-img">
-                  <a href="#"><img src="images/book1.jpg" alt="" /></a>
-                </div>
-                <div class="book-content">
-                  <h3 class="book-title"><a href="#">老人与海</a></h3>
-                  <p>作者：<span>海明威</span></p>
-                  <p>总借阅数：<span>50</span></p>
-                </div>
-            </div>
-          </div>
-				
-					<div class="clearfix"></div>
+          </div> -->
+					<!-- <div class="clearfix"></div> -->
 				</div>
 			</div>
 			<div class="exhibit-section">
 				<h4 class="head">热门图书<span class="line"></span></h4>		
 				<div class="exhibit-post-grids">
 					<div class="col-md-4 exhibit-posts">
-						
 					</div>
 					<div class="col-md-4 exhibit-posts">
-						
 					</div>
 					<div class="col-md-4 exhibit-posts span_66">
-						
 					</div>
 					<div class="clearfix"></div>
 				</div>

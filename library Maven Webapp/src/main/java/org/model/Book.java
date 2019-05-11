@@ -3,7 +3,10 @@ package org.model;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Book {
+	
 	//定义实体类的属性
 	private Integer id;
 	private String title;
@@ -11,9 +14,11 @@ public class Book {
 	private Integer categoryId;
 	private String simgUrl;
 	private String bimgUrl;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date includeDate;	//
 	private Integer total;
 	private Integer remain;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date publishDate;	//
 	private String publisher;
 	private Short lendable;
@@ -23,7 +28,8 @@ public class Book {
 	
 	//定义author属性
 	private Author author; //bookAuthorId -> book.id
-	
+	//定义category属性
+	private Category category; //categoryId -> category.id
 	
 	// Constructors
 
@@ -178,5 +184,12 @@ public class Book {
 	}
 	public void setAuthor(Author author) {
 		this.author = author;
+	}
+	
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 }

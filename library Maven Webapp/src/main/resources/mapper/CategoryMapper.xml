@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.dao.CategoryDao">
 	
+	<select id="queryCategoryById" resultType="org.model.Category">
+		select * from category where id = #{id} 
+	</select>
+	
 	<select id="queryCategory" parameterType="Integer" resultType="org.model.Category">
 		select * from category where pid = #{pid}
 	</select>

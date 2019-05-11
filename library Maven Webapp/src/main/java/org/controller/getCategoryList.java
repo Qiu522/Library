@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class getCategoryList {
-	@Autowired
-    private CategoryService categoryService;
+	private @Autowired CategoryService categoryService;
 	
 	
 	@RequestMapping("/getCategory.action")

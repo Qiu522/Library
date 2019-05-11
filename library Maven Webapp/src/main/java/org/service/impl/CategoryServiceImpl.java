@@ -16,6 +16,11 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryDao categoryDao;
 	
 	@Override
+	public Category queryCategoryById(int id) {
+		return categoryDao.queryCategoryById(id);
+	}
+	
+	@Override
 	public List<Category> queryCategory(Integer pid) {
 		
 		return categoryDao.queryCategory(pid);

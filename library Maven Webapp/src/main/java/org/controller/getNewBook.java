@@ -2,11 +2,8 @@ package org.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.model.Author;
 import org.model.Book;
-import org.model.Category;
 import org.service.AuthorService;
 import org.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +11,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller
-public class GetHotBooks {
+@Controller()
+public class getNewBook {
 	@Autowired BookService bookService;
 	@Autowired AuthorService authorService;
 	
-	@RequestMapping("/getHotBook.action")
+	@RequestMapping("/getNewBook.action")
 	public @ResponseBody List<Book> getHotBook(){
 		List<Book> list = null;
-		String categoryName = "lend_count";
-		int lendLimit = 9;
+		String categoryName = "include_date";
+		int lendLimit = 8;
 		try {
 			list = bookService.queryHotBooks(categoryName, lendLimit);
 			for(int i = 0; i < list.size(); i++){
@@ -34,7 +31,7 @@ public class GetHotBooks {
 				list.get(i).setAuthor(author);
 			}
 
-			//System.out.println(list);
+			//System.out.println(list.get(0).getIncludeDate());
 			
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,5 +40,4 @@ public class GetHotBooks {
 		
 		return list;
 	}
-	
 }
