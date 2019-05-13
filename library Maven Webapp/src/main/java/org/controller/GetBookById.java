@@ -33,14 +33,14 @@ public class GetBookById {
 		
 	}
 	
-	@RequestMapping("getBookDetail.action")
+	@RequestMapping("/getBookDetail.action")
 	public @ResponseBody Book getBookDetail(HttpServletRequest request, HttpServletResponse response){
 		int id = Integer.parseInt( request.getParameter("id") );
 		Book book = null;
 		
 		book = bookService.queryOneBook(id);
 		Author author = authorService.queryAuthorById( book.getBookAuthorId() );
-		System.out.println(author);
+		//System.out.println(author);
 		book.setAuthor(author);
 		Category category = categoryService.queryCategoryById( book.getCategoryId() );
 		book.setCategory(category);

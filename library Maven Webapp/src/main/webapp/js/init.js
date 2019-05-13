@@ -1,5 +1,8 @@
+/*
+ * ajax function
+ * */
 //图书列表信息请求
-let getCategory = (baseUrl, pid) =>{
+let getCategory = (baseUrl, pid, hasChild) =>{
 	$.ajax({
 		type: "post",
 	    url: `${baseUrl}/getCategory.action?pid=${pid}`,
@@ -7,7 +10,8 @@ let getCategory = (baseUrl, pid) =>{
 	    contentType: "application/json;charset=UTF-8", //发送数据的格式
 	    dataType: "json", //这是返回来是json，也就是回调json
 	    success: function(data){
-	    	createCategory(data);
+	    	createCategory(data, action, hasChild, pid);
+	    	
 	    }
 	});
 }
@@ -25,7 +29,7 @@ var getHotBooks = (baseUrl) => {
 	});
 }
 
-//热门信息请求
+//最新图书请求
 var getNewBook = (baseUrl) =>{
 	$.ajax({
 		type: "post",
@@ -49,14 +53,41 @@ var getBookDetail = (baseUrl, bookid) =>{
 	});
 }
 
+//分类书籍页面书籍数据
+let getCategoryBooks = (baseUrl, id, pageNum) =>{
+	$.ajax({
+		type: "post",
+	    url: `${baseUrl}/bookPage.action?id=${id}&pageNum=${pageNum}`,
+	    dataType: "json", //这是返回来是json，也就是回调json
+	    success: function(data){
+	    	createBookContent(data);
+	    	categoryClick(baseUrl);
+	    	pageClick(baseUrl, id);
+	    }
+	});
+}
+
+
+/*
+ * page init function
+ * */
 //生成图书列表
-let createCategory =  (data) => {
+let createCategory =  (data, action, hasChild, pid) => {
 	//console.log(data);
 	var oUl = document.querySelector(".category");
-	for(var i = 0; i < data.length; i++){
-		var oLi = `<li><a href="bookCategory.action?pid=${data[i].id}">${data[i].name}</a></li>`;
+	var oLi = hasChild ? "" : `<li cid=${pid}><a>全部结果</a></li>`;
 		oUl.innerHTML += oLi; 
-	}     	
+	for(var i = 0; i < data.length; i++){
+		if(hasChild){
+			oLi = `<li><a href="bookCategory.action?pid=${data[i].id}">${data[i].name}</a></li>`;
+		}else {
+			
+			oLi = `<li cid=${data[i].id}><a>${data[i].name}</a></li>`; 
+		}
+		oUl.innerHTML += oLi; 
+	}
+	
+	
 }
 
 /*
@@ -96,12 +127,12 @@ let createHotBook = (data) => {
 		
 		var oDiv = `<div class="exhibit-post">
 						<div class="exhibit-img"><a href="bookDetail.action?id=${data[i].id}"><img src="${data[i].simgUrl}"></a></div>
-						<a href="#" class="exhibit-title">${data[i].title}</a>
+						<a href="bookDetail.action?id=${data[i].id}" class="exhibit-title">${data[i].title}</a>
 						<p class="sub_head">作者： <a href="#">${data[i].author.name}</a> 【 ${data[i].author.birthplace} 】</p>
 						<span></span>
 						<p>总借阅数：<i>${data[i].lendCount}</i></p>
 		              	<p>${data[i].describe}</p>
-		              	<div class="sub_more"><a href="#">more >></a></div>
+		              	<div class="sub_more"><a href="bookDetail.action?id=${data[i].id}">more >></a></div>
 					</div>`;
 		
 		bookCols[minIndex].innerHTML += oDiv; 
@@ -109,7 +140,7 @@ let createHotBook = (data) => {
 }
 
 
-//生成上架图书
+//生成上架新书
 let createNewBook = (data) => {
 	var latestProjects = document.querySelector(".latest-projects");
 	
@@ -121,7 +152,7 @@ let createNewBook = (data) => {
               <a href="bookDetail.action?id=${data[i].id}"><img src="${data[i].simgUrl}" alt="" /></a>
             </div>
             <div class="book-content">
-              <h3 class="book-title"><a href="#">${data[i].title}</a></h3>
+              <h3 class="book-title"><a href="bookDetail.action?id=${data[i].id}">${data[i].title}</a></h3>
               <p>作者：<span>${data[i].author.name}</span></p>
               <p>上架时间：<span>${new Date(data[i].includeDate).Format("yyyy-MM-dd")}</span></p>
             </div>
@@ -181,11 +212,133 @@ let createBookDetail = (data) => {
 	
 	bookInformation.innerHTML += infoDiv;
 	detailContent.innerHTML += itemDiv;
+}
+
+/*{
+"totalCount": 11,
+"totalPage": 4,
+"sizePage": 3,
+"pageNum": 1,
+"books": [
+{
+"id": 1,
+"title": "月亮与六便士",
+"describe": "\"“满地都是六便士，他却抬头看见了月亮。” \n　　银行家查尔斯，人到中年，事业有成，为了追求内心隐秘的绘画梦想，突然抛妻别子，弃家出走。他深知：人的每一种身份都是一种自我绑架，唯有失去是通向自由之途。 \n　　在异国他乡，他贫病交加，对梦想却愈发坚定执着。他说：我必须画画，就像溺水的人必须挣扎。 \n　　在经历种种离奇遭遇后，他来到南太平洋的一座孤岛，同当地一位姑娘结婚生子，成功创作出一系列惊世杰作。就在此时，他被绝症和双目失明击倒，临死之前，他做出了让所有人震惊的决定……\n\n　　人世漫长得转瞬即逝，有人见尘埃，有人见星辰。查尔斯就是那个终其一生在追逐星辰的人。 \"\r\n",
+"categoryId": 20,
+"simgUrl": "//img11.360buyimg.com/n1/s200x200_jfs/t1/33019/32/8443/309737/5cc65941E05e84bf2/8f0ee1726c1349da.jpg",
+"bimgUrl": "//img11.360buyimg.com/n1/jfs/t1/33019/32/8443/309737/5cc65941E05e84bf2/8f0ee1726c1349da.jpg",
+"includeDate": "2019-05-08 22:53:03",
+"total": 6,
+"remain": 6,
+"publishDate": "2019-05-01 12:59:42",
+"publisher": "11",
+"lendable": 1,
+"site": "hhh",
+"lendCount": 5,
+"bookAuthorId": 1,
+"author": {
+"id": 1,
+"name": "威廉·萨默塞特·毛姆",
+"birthplace": "英国",
+"describe": "威廉·萨默塞特·毛姆（William Somerset Maugham,1874 -1965)，英国小说家，剧作家，被誉为“故事圣手”。 \r\n　　生于巴黎，十岁前父母双亡，由叔叔接回英国抚养，因身材矮小，说话结巴，总被同龄人欺凌，性格孤僻敏感。 \r\n　　18岁在伦敦学医，后弃医从文。23岁时发表首部小说《兰贝斯的丽莎》，从此走上文学创作的道路。人生经历奇特，他做过助产，做过间谍，做过演员，做过救护车司机；他做过丈夫，做过情人，拒绝过女人的求婚，他的求婚也被另一个女人拒绝；他自称“四分之三喜欢女人，只有四分之一喜欢男人”。 \r\n　　在文学界，毛姆是一个优雅、老到、冷漠的人性观察者，几乎每一个人都能在他的故事中看到自己，这也让毛姆成为二十世纪炙手可热的作家。 \r\n　　他的后半生住在一座仙境般的别墅里，晚年几乎获得了整个欧洲文学界的一切殊荣。91岁时，逝于法国。 \r\n　　经典代表作：《月亮与六便士》《人性的枷锁》。 "
+},
+"category": null
+},*/
+
+//分类书籍页面
+let createBookContent = (data) => {
+	var BookDiv = document.querySelector(".exhibit-post-grids");
+	var bookCols = BookDiv.querySelectorAll(".exhibit-posts");
+	//var obj = documnet.querySelector(".pagination");
+	var pageList = document.querySelector(".pageList");
+	var pageListContent = "";
 	
+	for(let i = 0; i < bookCols.length; i++){
+		bookCols[i].innerHTML = "";
+	}
+	
+	for(var i = 0; i < data.books.length; i++){
+		var minIndex = minHeightCol(bookCols);	
+		var oDiv = `<div class="exhibit-post">
+								<div class="exhibit-img"><a href="bookDetail.action?id=${data.books[i].id}"><img src="${data.books[i].simgUrl}"></a></div>
+								<a href="bookDetail.action?id=${data.books[i].id}" class="exhibit-title">${data.books[i].title}</a>
+								<p class="sub_head">作者为： <a href="#">${data.books[i].author.name}</a> 【 ${data.books[i].author.birthplace} 】</p>
+								<span></span>
+	              <p>${data.books[i].describe}</p>
+	            </div>`;
+		
+		bookCols[minIndex].innerHTML += oDiv; 
+	}
+	
+	pageListContent += `<li  pageNum=${1}><a class="prev">Prev</a></li>`;
+	if(data.totalPage <= 10){
+		for(let i = 1; i <= data.totalPage; i++){
+			pageListContent += `<li ${data.pageNum == i ? `class="active"` : ""} pageNum=${i}><a>${i}</a></li>`;
+		}
+	}else if(data.totalPage <= 10){
+		if(data.pageNum <= 5){
+			for(let i = 1; i <= 8; i++){
+				pageListContent += `<li ${data.pageNum == i ? `class="active"` : ""} pageNum=${i}><a>${i}</a></li>`;
+			}
+			pageListContent += `<li><span>.....</span></li>`;
+			pageListContent += `<li pageNum=${i}><a>${data.totalPage}</a></li>`;
+		}else if(data.pageNum > n-4){
+			pageListContent += `<li pageNum=1><a>1</a></li>`;
+			pageListContent += `<li><span>.....</span></li>`;
+			for(let i = 7; i >= 0; i--){
+				pageListContent += `<li ${data.pageNum == i ? `class="active"` : ""} pageNum=${data.totalPage - i}><a>${data.totalPage - i}</a></li>`;
+			}
+			
+		}else{
+			pageListContent += `<li pageNum=1><a>1</a></li>`;
+			pageListContent += `<li pageNum=2><a>2</a></li>`;
+			pageListContent += `<li><span>.....</span></li>`;
+			for(let i = data.pageNum - 2; i <=  data.pageNum + 2; i++){
+				pageListContent += `<li ${data.pageNum == i ? `class="active"` : ""} pageNum=${i}><a>${i}</a></li>`;
+			}
+			pageListContent += `<li><span>.....</span></li>`;
+			pageListContent += `<li pageNum=${data.totalPage}><a>${data.totalPage}</a></li>`;
+		}
+	}
+	pageListContent += `<li pageNum=${data.totalPage}><a class="next">Next</a></li>`;
+	pageList.innerHTML = pageListContent;
 }
 
 
+/*
+ * animation function
+ * */
+//book page
+pageClick = (baseUrl, pid)=>{
+	var pageList = document.querySelector(".pageList");
+	var aLi = pageList.querySelectorAll("li"); //0->prev end->next;
+	//页码交互
+	
+	for(let i = 0; i < aLi.length; i++){
+		aLi[i].addEventListener("click", function() {
+			var pageNum = this.getAttribute("pagenum");
+			getCategoryBooks(baseUrl, pid, pageNum);
+		}, false);
+	}
+}
 
+//list 
+categoryClick = (baseUrl) => {
+	var categoryList = document.querySelector(".category");
+	var aLi = categoryList.querySelectorAll("li");
+	//页码交互
+	for(let i = 0; i < aLi.length; i++){
+		aLi[i].addEventListener("click", function() {
+			var cid = this.getAttribute("cid");
+			console.log(cid);
+			getCategoryBooks(baseUrl, cid, 1);
+		}, false);
+	}
+}
+
+/*
+ * tool function
+ * */
 //获取最短列
 let minHeightCol = (cols) => {
 	let index = 0;

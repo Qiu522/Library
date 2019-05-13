@@ -18,6 +18,7 @@ body a{
 	-ms-transition:0.5s all;
 }
 body a:hover {
+	cursor:pointer;
   text-decoration: none;
 }
 input[type="button"],input[type="submit"]{
@@ -1052,6 +1053,10 @@ div#portfoliolist {
 	font-size:1.1em;
 	font-weight:400;
 	text-decoration:none;
+}
+.pagination ul .active a{
+	text-decoration: underline;
+	color:#e4393c;
 }
 .pagination ul li a.prev {
 	background: #4a4a4a;

@@ -32,15 +32,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script src="js/init.js"></script>
   <script type="text/javascript">
   var baseUrl='${pageContext.request.contextPath}';
+  var action = "bookPage.action";
+  var pid = GetQueryString("pid");
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
 			event.preventDefault();
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
 		});
-		var pid = GetQueryString("pid");
-			console.log(pid);
-			getCategory(baseUrl, pid);
 		
+		var iniPageNum = 1;
+			console.log(pid);
+			getCategory(baseUrl, pid, false);
+			
+			getCategoryBooks(baseUrl, pid, iniPageNum);
 	});
 		
 		
@@ -116,7 +120,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<!-- /head-section -->	
 					<div class="exhibit-post-grids exhibit_grids">
 						<div class="col-md-4 exhibit-posts">
-							<div class="exhibit-post">
+							<!-- <div class="exhibit-post">
 								<div class="exhibit-img"><a href="#"><img src="images/book2.jpg"></a></div>
 								<a href="#" class="exhibit-title">人间失格</a>
 								<p class="sub_head">作者为： <a href="#">太宰治</a> on 12/04/2014</p>
@@ -136,94 +140,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<p class="sub_head">Posted by <a href="#">Admin</a> on 12/04/2014</p>
 								<span></span>
 								<p>Phasellus in tincidunt velit. Etiam fermentum fringilla tristique. Aenean posuere aliquam interdum. Sed dignissim turpis eget leo ultricies ultricies. </p>
-							</div>
+							</div> -->
 						</div>
 						<div class="col-md-4 exhibit-posts">
-							<div class="exhibit-post">
-								<a href="single.html"><img src="images/b3.jpg"></a>
-								<a href="single.html" class="exhibit-title">This is exhibit post title</a>
-								<p class="sub_head">Posted by <a href="#">Admin</a> on 12/04/2014</p>
-								<span></span>
-								<p>Phasellus in tincidunt velit. Etiam fermentum fringilla tristique. Aenean posuere aliquam interdum. Sed dignissim turpis eget leo ultricies ultricies. </p>
-							</div>	
-							<div class="exhibit-post">
-								<a href="single.html"><img src="images/b1.jpg"></a>
-								<a href="single.html" class="exhibit-title">This is exhibit post title</a>
-								<p class="sub_head">Posted by <a href="#">Admin</a> on 12/04/2014</p>
-								<span></span>
-								<p>Phasellus in tincidunt velit. Etiam fermentum fringilla tristique. Aenean posuere aliquam interdum. Sed dignissim turpis eget leo ultricies ultricies. Sed et felis leo, eget dapibus massa. Etiam volutpat vehicula dolor, vel placerat odio posuere non.</p>
-							</div>	
-							<div class="exhibit-post">
-								<a href="single.html"><img src="images/p4.jpg"></a>
-								<a href="single.html" class="exhibit-title">This is exhibit post title</a>
-								<p class="sub_head">Posted by <a href="#">Admin</a>on 12/04/2014</p>
-								<span></span>
-								<p>Fusce placerat bibendum augue, non posuere lorem facilisis sit amet. Mauris malesuada nunc eget est pellentesque sit amet aliquet dolor pharetra. Integer placerat elit quis nisl dignissim non consectetur quam vestibulum. Suspendisse tincidunt adipiscing magna, ut dapibus nulla varius nec. Proin mi dolor, dapibus nec congue posuere, ornare sit. </p>
-							</div>	
+								
 						</div>
 						<div class="col-md-4 exhibit-posts span_66">
-							<div class="exhibit-post">
-								<a href="single.html"><img src="images/p6.jpg"></a>
-								<a href="single.html" class="exhibit-title">This is exhibit post title</a>
-								<p class="sub_head">Posted by <a href="#">Admin</a> on 12/04/2014</p>
-								<span></span>
-								<p>Phasellus in tincidunt velit. Etiam fermentum fringilla tristique. Aenean posuere aliquam interdum. Sed dignissim turpis eget leo ultricies ultricies. Sed et felis leo, eget dapibus massa. Etiam volutpat vehicula dolor, vel placerat odio posuere non.</p>
-							</div>	
-							<div class="exhibit-post">
-								<a href="single.html"><img src="images/b2.jpg"></a>
-								<a href="single.html" class="exhibit-title">This is exhibit post title</a>
-								<p class="sub_head">Posted by <a href="#">Admin</a> on 12/04/2014</p>
-								<span></span>
-								<p>Fusce placerat bibendum augue, non posuere lorem facilisis sit amet. Mauris malesuada nunc eget est pellentesque sit amet aliquet dolor pharetra. Integer placerat elit quis nisl dignissim non consectetur quam vestibulum. Suspendisse tincidunt adipiscing magna, ut dapibus nulla varius nec. Proin mi dolor, dapibus nec congue posuere, ornare sit. </p>
-							</div>	
-							<div class="exhibit-post">
-								<a href="single.html"><img src="images/b3.jpg"></a>
-								<a href="single.html" class="exhibit-title">This is blog post title</a>
-								<p class="sub_head">Posted by <a href="#">Admin</a> on 12/04/2014</p>
-								<span></span>
-								<p>Phasellus in tincidunt velit. Etiam fermentum fringilla tristique. Aenean posuere aliquam interdum. Sed dignissim turpis eget leo ultricies ultricies. </p>
-							</div>	
+							
 						</div>
 						<div class="clearfix"></div>
-						<!-- <div class="right_column">
-							<div class="item">
-								<header>
-									<h2 class="with-line">Categories</h2>
-								</header>
-								<ul>
-									<li><a href="#">Penatibus et magnis dis part urient mon</a></li>
-									<li><a href="#">Nascetur ridiculus mus nulla dui fusce </a></li>
-									<li><a href="#">Malesuada odio morbi nunc odio gravid</a></li>
-									<li><a href="#">Cursus nec luctus a lorem mauris accu</a></li>
-									<li><a href="#">Lacus ediscng aliqin pdeiquetsit amet </a></li>
-									<li><a href="#">Ut liguliquam dapibus tincidturent justo</a></li>
-									<li><a href="#">Loboeittis euisr piciatis unde omnis iste</a></li>
-									<li><a href="#">Errorptatem accusantium doloremen emq</a></li>
-									<li><a href="#">Laudantium totam remeaque ipsa quae</a></li>
-									<li><a href="#">Si architecto beatae vitae dicta sunt exp</a></li>
-								</ul>
-							</div>
-							<div class="item2">
-								<header>
-									<h2 class="with-line">Archives</h2>
-								</header>
-								<ul>
-									<li><a href="#">February 2014</a></li>
-									<li><a href="#">January 2014</a></li>
-									<li><a href="#">December 2013</a></li>
-									<li><a href="#">November 2013</a></li>
-									<li><a href="#">October 2013</a></li>
-									<li><a href="#">September 2013</a></li>
-									<li><a href="#">August 2013</a></li>
-									<li><a href="#">July 2013</a></li>
-								</ul>
-							</div>
-							<div class="clearfix"></div>
-						</div> -->
 					</div>
 				<div class="pagination text-center">
-					<ul>
-						<li><a class="prev" href="#">Prev</a></li>
+					<ul class="pageList">
+						<!-- <li><a class="prev" href="#">Prev</a></li>
 						<li><a href="#">1</a></li>
 						<li><a href="#">2</a></li>
 						<li><a href="#">3</a></li>
@@ -234,7 +163,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<li><a href="#">8</a></li>
 						<li><span>.....</span></li>
 						<li><a href="#">12</a></li>
-						<li><a href="#" class="next">Next</a></li>
+						<li><a href="#" class="next">Next</a></li> -->
 					</ul>
 	      </div>
 	      
@@ -331,5 +260,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 		</div>
+	<script src="js/bookanimation.js"></script>
   </body>
 </html>

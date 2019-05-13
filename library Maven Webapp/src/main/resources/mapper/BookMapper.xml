@@ -21,13 +21,29 @@
         <result column="lend_count" property="lendCount"/>
         <result column="book_author_id" property="bookAuthorId"/>
   </resultMap>
+  
+  <select id="queryAllBooksByCategory" resultMap="testResultMap">
+		select * from book where category_id in
+		<foreach collection="categories" item="categoryId" index="index"
+            open="(" close=")" separator=",">
+            #{categoryId}
+    </foreach>;
+	</select>
 	
 	<select id="queryOneBook" resultMap="testResultMap">
 		select * from book where id = #{id}
 	</select>
 	
 	<select id="queryHotBooks" resultMap="testResultMap">
-		select * from book order by #{columnName} desc limit #{limit};
+		select * from book order by ${columnName} desc limit #{limit};
+	</select>
+	
+	<select id="queryBooksByCategory" resultMap="testResultMap">
+		select * from book where category_id in
+		<foreach collection="categories" item="categoryId" index="index"
+            open="(" close=")" separator=",">
+            #{categoryId}
+    </foreach> limit #{pageNum}, #{totalPageNum};
 	</select>
 
 </mapper>
