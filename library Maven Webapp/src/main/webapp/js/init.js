@@ -75,8 +75,13 @@ let getCategoryBooks = (baseUrl, id, pageNum) =>{
 let createCategory =  (data, action, hasChild, pid) => {
 	//console.log(data);
 	var oUl = document.querySelector(".category");
-	var oLi = hasChild ? "" : `<li cid=${pid}><a>全部结果</a></li>`;
-		oUl.innerHTML += oLi; 
+	var oLi = hasChild ? "" : `<li cid=${pid}><a class="active">全部结果</a></li>`;
+	oUl.innerHTML += oLi;
+	
+	/*console.log(data.findIndex((obj) => {
+		return obj.id == 2;
+	}));*/
+	
 	for(var i = 0; i < data.length; i++){
 		if(hasChild){
 			oLi = `<li><a href="bookCategory.action?pid=${data[i].id}">${data[i].name}</a></li>`;
@@ -270,7 +275,7 @@ let createBookContent = (data) => {
 		bookCols[minIndex].innerHTML += oDiv; 
 	}
 	
-	pageListContent += `<li  pageNum=${1}><a class="prev">Prev</a></li>`;
+	pageListContent += `<li  pageNum=${data.pageNum > 1 ? data.pageNum-1 : 1}><a class="prev">Prev</a></li>`;
 	if(data.totalPage <= 10){
 		for(let i = 1; i <= data.totalPage; i++){
 			pageListContent += `<li ${data.pageNum == i ? `class="active"` : ""} pageNum=${i}><a>${i}</a></li>`;
@@ -300,7 +305,7 @@ let createBookContent = (data) => {
 			pageListContent += `<li pageNum=${data.totalPage}><a>${data.totalPage}</a></li>`;
 		}
 	}
-	pageListContent += `<li pageNum=${data.totalPage}><a class="next">Next</a></li>`;
+	pageListContent += `<li pageNum=${data.pageNum < data.totalPage ? data.pageNum+1 : data.totalPage}><a class="next">Next</a></li>`;
 	pageList.innerHTML = pageListContent;
 }
 
@@ -326,12 +331,19 @@ pageClick = (baseUrl, pid)=>{
 categoryClick = (baseUrl) => {
 	var categoryList = document.querySelector(".category");
 	var aLi = categoryList.querySelectorAll("li");
+	var aA = categoryList.querySelectorAll("a");
 	//页码交互
 	for(let i = 0; i < aLi.length; i++){
 		aLi[i].addEventListener("click", function() {
 			var cid = this.getAttribute("cid");
-			console.log(cid);
+			//console.log(cid);
 			getCategoryBooks(baseUrl, cid, 1);
+			
+			//选中a active标记
+			for(let j = 0; j < aA.length; j++){
+				aA[j].setAttribute("class", "");
+			}
+			aA[i].setAttribute("class", "active")
 		}, false);
 	}
 }
