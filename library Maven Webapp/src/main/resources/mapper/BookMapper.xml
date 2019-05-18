@@ -58,5 +58,25 @@
             #{authorId}
     </foreach>
 	</select>
+	
+	<update id="updateBook" parameterType="org.model.Book">
+		update book
+		<set>
+			 <if test="title != null">title =  #{title},</if>
+			 <if test="categoryId != null">category_id = #{categoryId},</if>
+			 <if test="simgUrl != null">sImg_url = #{simgUrl},</if>
+			 <if test="bimgUrl != null">bImg_url = #{bimgUrl},</if>
+			 <if test="includeDate != null">include_date = #{includeDate},</if>
+			 <if test="total != null">total = #{total},</if>
+			 <if test="remain != null">remain =  #{remain},</if>
+			 <if test="publishDate != null">publish_date = #{publishDate},</if>
+			 <if test="publisher != null">publisher = #{publisher},</if>
+			 <if test="lendable != null">lendable = #{lendable},</if>
+			 <if test="site != null">site = #{site},</if>
+			 <if test="lendCount != null">lend_count = #{lendCount},</if>
+			 <if test="bookAuthorId != null">book_author_id = #{bookAuthorId}</if>
+		</set>
+		where id = #{id}; 
+	</update>
 
 </mapper>

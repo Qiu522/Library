@@ -31,4 +31,7 @@ public interface BookDao {
 	
 	//按关键字查询
 	public List<Book> queryBookByKey(@Param("key") String key);
+	
+	//更新图书
+	public int updateBook(Book book);
 }

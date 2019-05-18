@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dao.ReaderDao">
+	
+	<resultMap type="org.model.Reader" id="testResultMap">
+        <!-- id用来配置表的主键与类的属性的映射关系 ,column指定的是表的字段名； property指定的是类的属性名-->
+        <id column="id" property="id"/>
+        <!-- result用来配置 普通字段与类的属性的映射关系 ,column指定的是表的字段名； property指定的是类的属性名-->
+        <result column="readername" property="readerName"/>
+        <result column="password" property="password"/>
+        <result column="age" property="age"/>
+        <result column="sex" property="sex"/>
+        <result column="acount" property="acount"/>
+        <result column="bookcount" property="bookCount"/>
+  </resultMap>
+	
+	<select id="queryReaderById" parameterType="Integer" resultType="org.model.Reader">
+		select * from reader where id = #{id}
+	</select>
+	
+	<update id="updateReader" parameterType="org.model.Reader">
+		update reader
+		<set>
+			 <if test="readerName != null">readername =  #{readerName},</if>
+			 <if test="password != null">password = #{password},</if>
+			 <if test="age != null">age = #{age},</if>
+			 <if test="sex != null">sex = #{sex},</if>
+			 <if test="acount != null">acount = #{acount},</if>
+			 <if test="bookCount != null">bookcount = #{bookCount}</if>
+		</set>
+		where id = #{id}; 
+	</update>
+
+</mapper>

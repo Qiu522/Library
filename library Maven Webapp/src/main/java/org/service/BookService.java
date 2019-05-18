@@ -19,4 +19,6 @@ public interface BookService {
 	public List<Book> queryBookByKey(String key);
 	//按author_id查找图书
 	public List<Book> queryBookByAuthor(List<Integer> ids);
+	//更新图书
+	public int updateBook(Book book);
 }

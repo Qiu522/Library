@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.dao.CategoryDao">
+<mapper namespace="org.dao.LendInfoDao">
 	
 	<resultMap type="org.model.LendInfo" id="testResultMap">
         <!-- id用来配置表的主键与类的属性的映射关系 ,column指定的是表的字段名； property指定的是类的属性名-->
@@ -14,11 +14,13 @@
         <result column="hascharge" property="hasCharge"/>
   </resultMap>
 	
-	<insert id="insertLendInfo" useGeneratedKeys="true" keyProperty="id">
+	<insert id="insertLendInfo" parameterType="org.model.LendInfo" useGeneratedKeys="true" keyProperty="id">
 	  insert into lend_info (reader_id, book_id, lend_date, deadline, hascharge)
-	  values (#{lendInfo.readerId},#{lendInfo.bookId},#{lendInfo.lendDate},#{lendInfo.deadLine},#{lendInfo.hasCharge});
+	  values (#{readerId},#{bookId},#{lendDate},#{deadLine},#{hasCharge});
 	</insert>
 	
-	
+	<select id="queryLendInfoByReaderId" resultMap="testResultMap">
+		select * from lend_info where return_date is NULL and reader_id = #{readerId};
+	</select>
 
 </mapper>
