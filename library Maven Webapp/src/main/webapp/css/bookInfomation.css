@@ -79,3 +79,97 @@
   line-height: 24px;
   font-size: 14px;
 }
+
+/*
+’Àªß–≈œ¢
+*/
+.userContent {
+  width: 100%;
+  border-top: 1px solid #dbdbdb;
+}
+.userContent .uerInfo {
+  width: 1170px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+.userContent .uerInfo .user-title{
+  padding: 15px 0;
+}
+.userContent .uerInfo .user-content ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 8em;
+  padding:1em 0 2em; 
+}
+.userContent .uerInfo .user-content ul li{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.userContent .uerInfo .menu ul{
+  display: flex;
+  flex-direction: row;
+}
+.userContent .uerInfo .menu ul li a{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 110px;
+  height: 97px;
+  padding-top: 13px;
+}
+.userContent .uerInfo .menu ul li a div {
+  font-size: 3em;
+  margin: 10px;
+}
+.userContent .uerInfo .book-table {
+  width: 100%;
+  border: 1px solid;
+  border-spacing: 2px;
+  border-color: grey;
+}
+.userContent .uerInfo .book-table  tr {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid;
+  border-spacing: 2px;
+  border-color: grey;
+  
+}
+.userContent .uerInfo .book-table thead tr{
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  background: #f5f5f5;
+  color: #666;
+  font-weight: 400;
+}
+.userContent .uerInfo .book-table  tr th{
+  flex: 1;
+}
+.userContent .uerInfo .book-table  tr th:nth-of-type(1){
+  flex: 3;
+}
+.userContent .uerInfo .book-table thead tr{
+
+}
+.userContent .uerInfo .book-table tbody tr th:nth-of-type(1){
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.userContent .uerInfo .book-table tbody .book-detail{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.userContent .uerInfo .book-table tbody img{
+  width: 70%;
+  height: 70%;
+}

@@ -67,6 +67,24 @@ let getCategoryBooks = (baseUrl, id, pageNum) =>{
 	});
 }
 
+//查询
+let searchBook = (baseUrl)=>{
+	var searchWay = GetQueryString("searchWay");
+	var name = GetQueryString("name");
+	console.log(name + " " +searchWay);
+	$.ajax({
+		type: "post",
+	    url: `${baseUrl}/getSearchResult.action?searchWay=${searchWay}&name=${name}`,
+	    data: null,
+	    contentType: "application/json;charset=UTF-8", //发送数据的格式
+	    dataType: "json", //这是返回来是json，也就是回调json
+	    success: function(data){
+	    	console.log(data);//TODO
+	    	createHotBook(data);
+	    }
+	});
+}
+
 
 /*
  * page init function
@@ -192,7 +210,7 @@ let createBookDetail = (data) => {
         <span>在馆书册：<i>${data.remain}</i></span>  
       </div>
       <div>馆藏位置：<span>${data.site}</span></div>
-      <div class="lend"><a href="#">借书</a></div>
+      <div class="lend"><a ${data.remain != 0 ? `class="lendable"` : ""}>借书</a></div>
     </div>`;
     
     var itemDiv = `<div class="item-mt">
@@ -385,7 +403,16 @@ Date.prototype.Format = function(fmt) {
 let GetQueryString = (name) => {
 	var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
 	var r = window.location.search.substr(1).match(reg);
-	if(r!=null)return  unescape(r[2]); return null;
+	if(r!=null){
+		if(name === "name"){
+			console.log("name");
+			return  decodeURI(r[2]);
+		}
+
+		console.log("fei name");
+		return  unescape(r[2]);
+	} 
+	return null;
 }
 
 

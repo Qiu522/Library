@@ -1,5 +1,7 @@
 package org.service.impl;
 
+import java.util.List;
+
 import org.dao.AuthorDao;
 import org.model.Author;
 import org.service.AuthorService;
@@ -14,6 +16,12 @@ public class AuthorServiceImpl implements AuthorService {
 	@Override
 	public Author queryAuthorById(int id) {
 		return authorDao.queryAuthorById(id);
+	}
+
+	@Override
+	public List<Integer> queryAuthorByName(String name) {
+		// TODO Auto-generated method stub
+		return authorDao.queryAuthorByName(name);
 	}
 	
 	

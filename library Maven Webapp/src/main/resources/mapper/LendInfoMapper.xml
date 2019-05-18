@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dao.CategoryDao">
+	
+	<resultMap type="org.model.LendInfo" id="testResultMap">
+        <!-- id用来配置表的主键与类的属性的映射关系 ,column指定的是表的字段名； property指定的是类的属性名-->
+        <id column="id" property="id"/>
+        <!-- result用来配置 普通字段与类的属性的映射关系 ,column指定的是表的字段名； property指定的是类的属性名-->
+        <result column="reader_id" property="readerId"/>
+        <result column="book_id" property="bookId"/>
+        <result column="lend_date" property="lendDate"/>
+        <result column="return_date" property="returnDate"/>
+        <result column="deadline" property="deadLine"/>
+        <result column="hascharge" property="hasCharge"/>
+  </resultMap>
+	
+	<insert id="insertLendInfo" useGeneratedKeys="true" keyProperty="id">
+	  insert into lend_info (reader_id, book_id, lend_date, deadline, hascharge)
+	  values (#{lendInfo.readerId},#{lendInfo.bookId},#{lendInfo.lendDate},#{lendInfo.deadLine},#{lendInfo.hasCharge});
+	</insert>
+	
+	
+
+</mapper>

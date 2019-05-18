@@ -33,18 +33,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script type="text/javascript">
   var baseUrl='${pageContext.request.contextPath}';
   var action = "bookPage.action";
-  var pid = GetQueryString("pid");
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
 			event.preventDefault();
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
 		});
 		
-		var iniPageNum = 1;
-			console.log(pid);
-			getCategory(baseUrl, pid, false);
+		searchBook(baseUrl);
 			
-			getCategoryBooks(baseUrl, pid, iniPageNum);
 	});
 		
 		
@@ -58,6 +54,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="logo">
 					<a href="index.jsp"><img src="images/logo-l.png" alt="" /></a>
 				</div>
+				<!-- <div class="social-icons header-social-icons">
+					<a href="#"><i class="twitter"></i></a>
+					<a href="#"><i class="facebook"></i></a>
+					<a href="#"><i class="dribble"></i></a>
+					<a href="#"><i class="rss"></i></a>
+				</div> -->
 				<div class="user-login">
 					<a href="#" class="link-login">您好！请登录</a>&nbsp;&nbsp;
 					<a href="#" class="link-regist">免费注册</a>
@@ -77,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<a href="index.jsp"><img src="images/home1.png" alt="" /></a>
 					</div>
 					<div class="search">
-					<form  method="get" action="${pageContext.request.contextPath}/search.action">
+						<form  method="get" action="${pageContext.request.contextPath}/search.action">
 							<select name="searchWay">
 								<option value="bookName">书名</option>
 								<option value="author">作者</option>
@@ -169,59 +171,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</ul>
 	      </div>
 	      
-	      <div class="right_column">
-							<div class="item">
-								<header>
-									<h2 class="with-line">Categories</h2>
-								</header>
-								<ul>
-									<li><a href="#">Penatibus et magnis dis part urient mon</a></li>
-									<li><a href="#">Nascetur ridiculus mus nulla dui fusce </a></li>
-									<li><a href="#">Malesuada odio morbi nunc odio gravid</a></li>
-									<li><a href="#">Cursus nec luctus a lorem mauris accu</a></li>
-									<li><a href="#">Lacus ediscng aliqin pdeiquetsit amet </a></li>
-									<li><a href="#">Ut liguliquam dapibus tincidturent justo</a></li>
-									<li><a href="#">Loboeittis euisr piciatis unde omnis iste</a></li>
-									<li><a href="#">Errorptatem accusantium doloremen emq</a></li>
-									<li><a href="#">Laudantium totam remeaque ipsa quae</a></li>
-									<li><a href="#">Si architecto beatae vitae dicta sunt exp</a></li>
-								</ul>
-							</div>
-							<div class="item2">
-								<header>
-									<h2 class="with-line">Archives</h2>
-								</header>
-								<ul>
-									<li><a href="#">February 2014</a></li>
-									<li><a href="#">January 2014</a></li>
-									<li><a href="#">December 2013</a></li>
-									<li><a href="#">November 2013</a></li>
-									<li><a href="#">October 2013</a></li>
-									<li><a href="#">September 2013</a></li>
-									<li><a href="#">August 2013</a></li>
-									<li><a href="#">July 2013</a></li>
-								</ul>
-	            </div>
-	            <div class="item3">
-	                <header>
-	                  <h2 class="with-line">Archives</h2>
-	                </header>
-	                <ul>
-	                  <li><a href="#">February 2014</a></li>
-	                  <li><a href="#">January 2014</a></li>
-	                  <li><a href="#">December 2013</a></li>
-	                  <li><a href="#">November 2013</a></li>
-	                  <li><a href="#">October 2013</a></li>
-	                  <li><a href="#">September 2013</a></li>
-	                  <li><a href="#">August 2013</a></li>
-	                  <li><a href="#">July 2013</a></li>
-	                </ul>
-	              </div>
-							<div class="clearfix"></div>
-						</div>
-				</div>
-			</div>
-		</div>
+	     
 		<div class="footer">
 			<div class="footer-top">
 				<div class="container">

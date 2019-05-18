@@ -70,6 +70,17 @@ public class BookServiceImpl implements BookService{
 		
 		return bookDao.queryAllBooksByCategory(categories);
 	}
+
+	@Override
+	public List<Book> queryBookByKey(String key) {
+		
+		return bookDao.queryBookByKey(key);
+	}
+
+	@Override
+	public List<Book> queryBookByAuthor(List<Integer> ids) {
+		return bookDao.queryBookByAuthor(ids);
+	}
 	
 	
 }

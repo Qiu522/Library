@@ -45,5 +45,18 @@
             #{categoryId}
     </foreach> limit #{pageNum}, #{totalPageNum};
 	</select>
+	
+	<select id="queryBookByKey" resultMap="testResultMap">
+		<bind name="key" value="'%' + key + '%'" />
+		select * from book where title LIKE #{key};
+	</select>
+	
+	<select id="queryBookByAuthor" resultMap="testResultMap">
+		select * from book where book_author_id in
+		<foreach collection="author_ids" item="authorId" index="index"
+            open="(" close=")" separator=",">
+            #{authorId}
+    </foreach>
+	</select>
 
 </mapper>

@@ -6,4 +6,8 @@
 		select * from author where id = #{id}
 	</select>
 
+	<select id="queryAuthorByName" resultType="Integer">
+		<bind name="name" value="'%' + name + '%'" />
+		select id from author where name LIKE #{name}
+	</select>
 </mapper>

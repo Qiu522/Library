@@ -7,7 +7,7 @@ import org.model.Category;
 
 public interface CategoryService {
 	//查找一个分类
-		public Category queryCategoryById(@Param("id") int id);
+	public Category queryCategoryById(@Param("id") int id);
 	//查询分类
 	public List<Category> queryCategory(Integer pid);
 	

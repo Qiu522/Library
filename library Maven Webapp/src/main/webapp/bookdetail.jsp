@@ -45,11 +45,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="logo">
         <a href="index.jsp"><img src="images/logo-l.png" alt="" /></a>
 			</div>
-			<div class="social-icons header-social-icons">
-				<a href="#"><i class="twitter"></i></a>
-				<a href="#"><i class="facebook"></i></a>
-				<a href="#"><i class="dribble"></i></a>
-				<a href="#"><i class="rss"></i></a>
+			<div class="user-login">
+				<a href="#" class="link-login">您好！请登录</a>&nbsp;&nbsp;
+				<a href="#" class="link-regist">免费注册</a>
 			</div>
 			<div class="clearfix"></div>
 		</div>
@@ -150,36 +148,36 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   </div>
 	<div class="footer">
 		<div class="footer-top">
-			<div class="container">
-				<div class="col-md-4 footer-grid">
-					<h5>ABOUT US</h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in purus nibh. Donec ornare felis neque. Nullam tortor nulla, sodales quis posuere quis, tristique nec libero. Proin vitae convallis odio. Morbi nec enim nisi. Aliquam erat volutpat. </p>
+				<div class="container">
+					<div class="col-md-4 footer-grid">
+						<h5>ABOUT US</h5>
+						<p>生活总是让我们遍体鳞伤，但到后来，那些受伤的地方一定会变成我们最强壮的地方。</p>
+					</div>
+					<div class="col-md-4 footer-grid">
+						<h5>PROVERB</h5>
+						<p>哪里有阴影，哪里就有光。</p>
+						<span>one more</span>
+						<p>Less interests, more interest</p>
+						<span>by zyf and xhw</span>
+					</div>
+					<div class="col-md-4 footer-grid">
+						<h5>FOLLOW US</h5>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in purus nibh. Donec ornare felis neque. Nullam tortor! </p>
+						
+				<div class="social-icons">
+					<a href="#"><i class="twitter"></i></a>
+					<a href="#"><i class="facebook"></i></a>
+					<a href="#"><i class="dribble"></i></a>
+					<a href="#"><i class="rss"></i></a>
 				</div>
-				<div class="col-md-4 footer-grid">
-					<h5>TWITTER FEED</h5>
-					<p>Check out th best Themes online in the world <br>at <a href="mail-to:example.com">http://example.com </a></p>
-					<span>1 day ago</span>
-					<p><a href="#">@envanto</a>, Motive wordpress theme full responsive is coming soon...</p>
-					<span>4 day ago</span>
+					</div>
+					<div class="clearfix"></div>
 				</div>
-				<div class="col-md-4 footer-grid">
-					<h5>FOLLOW US</h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in purus nibh. Donec ornare felis neque. Nullam tortor! </p>
-					
-			<div class="social-icons">
-				<a href="#"><i class="twitter"></i></a>
-				<a href="#"><i class="facebook"></i></a>
-				<a href="#"><i class="dribble"></i></a>
-				<a href="#"><i class="rss"></i></a>
-			</div>
-				</div>
-				<div class="clearfix"></div>
-			</div>
 		</div>
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="copyrights">
-					<p>Copyright &copy; 2015.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
+					<p>Copyright &copy; 2015.Company name All rights reserved.</p>
 				</div>
 				<div class="go-top">
 					<a href="#header" class="scroll"><img src="images/go-to-top.png" alt="" /></a>
