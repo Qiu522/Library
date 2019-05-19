@@ -62,7 +62,7 @@
 	<update id="updateBook" parameterType="org.model.Book">
 		update book
 		<set>
-			 <if test="title != null">title =  #{title},</if>
+			 <if test="title != null">title =  #{title},</if> 
 			 <if test="categoryId != null">category_id = #{categoryId},</if>
 			 <if test="simgUrl != null">sImg_url = #{simgUrl},</if>
 			 <if test="bimgUrl != null">bImg_url = #{bimgUrl},</if>

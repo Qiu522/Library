@@ -48,7 +48,7 @@ var getBookDetail = (baseUrl, bookid) =>{
 	    dataType: "json", //这是返回来是json，也就是回调json
 	    success: function(data){
 	    	//console.log(data);
-	    	createBookDetail(data);
+	    	createBookDetail(baseUrl ,data);
 	    }
 	});
 }
@@ -79,8 +79,52 @@ let searchBook = (baseUrl)=>{
 	    contentType: "application/json;charset=UTF-8", //发送数据的格式
 	    dataType: "json", //这是返回来是json，也就是回调json
 	    success: function(data){
-	    	console.log(data);//TODO
+	    	//console.log(data);
 	    	createHotBook(data);
+	    }
+	});
+}
+
+/*//借书
+let lendBook = (readerId, bookId)=>{
+	$.ajax({
+		type: "post",
+	    url: `${baseUrl}/lendBook.action?readerId=${readerId}&bookId=${bookId}`,
+    	data: null,
+	    contentType: "application/json;charset=UTF-8", //发送数据的格式
+	    dataType: "json", //这是返回来是json，也就是回调json
+	    success: function(data){
+	    	console.log(1);
+	    }
+	});
+}*/
+
+//获取用户具体信息
+let getReader = (baseUrl, readerId)=>{
+	$.ajax({
+		type: "post",
+	    url: `${baseUrl}/getReaderInfo.action?readerId=${readerId}`,
+    	data: null,
+	    contentType: "application/json;charset=UTF-8", //发送数据的格式
+	    dataType: "json", //这是返回来是json，也就是回调json
+	    success: function(data){
+	    	//console.log(data);
+	    	createreaderDetail(data, readerId);
+	    }
+	});
+}
+
+//获取借书信息
+let getBorrowInfo = (baseUrl, readerId, tab)=>{
+	$.ajax({
+		type: "post",
+	    url: `${baseUrl}/getBorrowInfo.action?readerId=${readerId}&tab=${tab}`,
+    	data: null,
+	    contentType: "application/json;charset=UTF-8", //发送数据的格式
+	    dataType: "json", //这是返回来是json，也就是回调json
+	    success: function(data){
+	    	console.log(data);
+	    	createBorrowDetail(tab, data, readerId);
 	    }
 	});
 }
@@ -189,7 +233,7 @@ let createNewBook = (data) => {
 }
 
 //生成图书详情
-let createBookDetail = (data) => {
+let createBookDetail = (baseUrl, data) => {
 	var bookInformation = document.querySelector(".book-information");
 	var detailContent = document.querySelector(".detail-content");
 	
@@ -210,7 +254,7 @@ let createBookDetail = (data) => {
         <span>在馆书册：<i>${data.remain}</i></span>  
       </div>
       <div>馆藏位置：<span>${data.site}</span></div>
-      <div class="lend"><a ${data.remain != 0 ? `class="lendable"` : ""}>借书</a></div>
+      <div class="lend"><a ${data.remain != 0 ? `class="lendable"` : ""} bid=${data.id}>借书</a></div>
     </div>`;
     
     var itemDiv = `<div class="item-mt">
@@ -235,6 +279,11 @@ let createBookDetail = (data) => {
 	
 	bookInformation.innerHTML += infoDiv;
 	detailContent.innerHTML += itemDiv;
+	
+	//TODO
+	let readerId = 1;
+	lendBookClick(readerId);
+	
 }
 
 /*{
@@ -327,12 +376,176 @@ let createBookContent = (data) => {
 	pageList.innerHTML = pageListContent;
 }
 
+//readerDetail
+let createreaderDetail = (data, readerId)=>{
+	let uerInfo = document.querySelector(".uerInfo");
+	let userTitle = uerInfo.querySelector(".user-title");
+	let userContent = uerInfo.querySelector(".user-content");
+	userTitle.innerHTML += `<h3><i> ${data.readerName} </i>的个人信息</h3>`;
+	
+	userContent.innerHTML += `<ul>
+						          <li>
+						            <h4>年龄</h4>
+						            <span>${data.age}</span>
+						          </li>
+						          <li>
+						            <h4>性别</h4>
+						            <span>${data.sex == 1 ? '男' : '女'}</span>
+						          </li>
+						          <li>
+						            <h4>账户余额</h4>
+						            <span>${parseFloat(data.acount).toFixed(2)}</span>
+						          </li>
+						          <li>
+						            <h4>剩余借书量</h4>
+						            <span>${data.totalBookNum - data.bookCount}</span>
+						          </li>
+						        </ul>`
+}
+
+/*{
+"id": 4,
+"readerId": 1,
+"bookId": 1,
+"lendDate": "2019-05-19 10:23:04",
+"returnDate": null,
+"deadLine": "2019-08-17 10:23:04",
+"hasCharge": 0,
+"book": {
+"id": 1,
+"title": "月亮与六便士",
+"describe": "\"“满地都是六便士，他却抬头看见了月亮。” \n　　银行家查尔斯，人到中年，事业有成，为了追求内心隐秘的绘画梦想，突然抛妻别子，弃家出走。他深知：人的每一种身份都是一种自我绑架，唯有失去是通向自由之途。 \n　　在异国他乡，他贫病交加，对梦想却愈发坚定执着。他说：我必须画画，就像溺水的人必须挣扎。 \n　　在经历种种离奇遭遇后，他来到南太平洋的一座孤岛，同当地一位姑娘结婚生子，成功创作出一系列惊世杰作。就在此时，他被绝症和双目失明击倒，临死之前，他做出了让所有人震惊的决定……\n\n　　人世漫长得转瞬即逝，有人见尘埃，有人见星辰。查尔斯就是那个终其一生在追逐星辰的人。 \"\r\n",
+"categoryId": 20,
+"simgUrl": "//img11.360buyimg.com/n1/s200x200_jfs/t1/33019/32/8443/309737/5cc65941E05e84bf2/8f0ee1726c1349da.jpg",
+"bimgUrl": "//img11.360buyimg.com/n1/jfs/t1/33019/32/8443/309737/5cc65941E05e84bf2/8f0ee1726c1349da.jpg",
+"includeDate": "2019-05-08 22:53:03",
+"total": 6,
+"remain": 5,
+"publishDate": "2019-05-01 12:59:42",
+"publisher": "11",
+"lendable": 1,
+"site": "hhh",
+"lendCount": 5,
+"bookAuthorId": 1,
+"author": null,
+"category": null
+},
+"timeLimite": 90
+},
+*/
+//borrowDetail
+let createBorrowDetail = (tab, data, readerId)=>{
+	let thead = $("thead");
+	let tbody = $(".borrowbook-detail");
+	let oHTr = "";
+	thead.html("");
+	tbody.html("");
+	let oTab = parseInt(tab)
+	switch (oTab) {
+	case 1:
+		oHTr = `<tr>
+	        <th>图书信息</th>
+	        <th>借书时间</th>
+	        <th>还书时间</th>
+	        <th>是否逾期</th>
+	        <th>是否还书</th>
+	      </tr>`
+		thead.append(oHTr);
+		
+		for(let i = 0; i < data.length; i++){
+			let lenddata = new Date(data[i].lendDate).Format("yyyy-MM-dd");
+			let deaddata = new Date(data[i].deadLine).Format("yyyy-MM-dd");
+			
+			let oTr = `<tr>
+	                <th>
+	                  <div class="book-img">
+	                    <a><img src="${data[i].book.simgUrl}"></a>
+	                  </div>
+	                  <div class="book-detail">
+	                    <h3>${data[i].book.title}</h3>
+	                    <p>作者：<span>${data[i].book.author.name}</span></p>
+	                  </div>
+	                </th>
+	                <th>${ lenddata }</th>
+	                <th>${ deaddata }</th>
+	                <th>${lateDate(lenddata , deaddata) ? "否" : "是" }</th>
+	                <th><a class="return" bookId="${data[i].book.id}">还书</a></th>
+	              </tr>`;
+			tbody.append(oTr);
+		}
+		returnBook(readerId);
+		break;
+	case 2:
+		oHTr = `<tr>
+	        <th>图书信息</th>
+	        <th>借书时间</th>
+	        <th>还书时间</th>
+	        <th>是否逾期</th>
+	      </tr>`
+		thead.append(oHTr);
+		
+		for(let i = 0; i < data.length; i++){
+			let lenddata = new Date(data[i].lendDate).Format("yyyy-MM-dd");
+			let deaddata = new Date(data[i].deadLine).Format("yyyy-MM-dd");
+			
+			let oTr = `<tr>
+	                <th>
+	                  <div class="book-img">
+	                    <a><img src="${data[i].book.simgUrl}"></a>
+	                  </div>
+	                  <div class="book-detail">
+	                    <h3>${data[i].book.title}</h3>
+	                    <p>作者：<span>${data[i].book.author.name}</span></p>
+	                  </div>
+	                </th>
+	                <th>${ lenddata }</th>
+	                <th>${ deaddata }</th>
+	                <th>${lateDate(lenddata , deaddata) ? "否" : "是" }</th>
+	              </tr>`;
+			tbody.append(oTr);
+		}
+		break;
+	case 3:
+		oHTr = `<tr>
+	        <th>图书信息</th>
+	        <th>借书时间</th>
+	        <th>还书时间</th>
+	        <th>是否逾期</th>
+	      </tr>`
+		thead.append(oHTr);
+		
+		for(let i = 0; i < data.length; i++){
+			let lenddata = new Date(data[i].lendDate).Format("yyyy-MM-dd");
+			let deaddata = new Date(data[i].deadLine).Format("yyyy-MM-dd");
+			
+			let oTr = `<tr>
+	                <th>
+	                  <div class="book-img">
+	                    <a><img src="${data[i].book.simgUrl}"></a>
+	                  </div>
+	                  <div class="book-detail">
+	                    <h3>${data[i].book.title}</h3>
+	                    <p>作者：<span>${data[i].book.author.name}</span></p>
+	                  </div>
+	                </th>
+	                <th>${ lenddata }</th>
+	                <th>${ deaddata }</th>
+	                <th>${lateDate(lenddata , deaddata) ? "否" : "是" }</th>
+	              </tr>`;
+			tbody.append(oTr);
+		}
+		break;
+	default:
+		break;
+	}
+}
+
 
 /*
  * animation function
  * */
 //book page
-pageClick = (baseUrl, pid)=>{
+let pageClick = (baseUrl, pid)=>{
 	var pageList = document.querySelector(".pageList");
 	var aLi = pageList.querySelectorAll("li"); //0->prev end->next;
 	//页码交互
@@ -346,7 +559,7 @@ pageClick = (baseUrl, pid)=>{
 }
 
 //list 
-categoryClick = (baseUrl) => {
+let categoryClick = (baseUrl) => {
 	var categoryList = document.querySelector(".category");
 	var aLi = categoryList.querySelectorAll("li");
 	var aA = categoryList.querySelectorAll("a");
@@ -361,10 +574,92 @@ categoryClick = (baseUrl) => {
 			for(let j = 0; j < aA.length; j++){
 				aA[j].setAttribute("class", "");
 			}
-			aA[i].setAttribute("class", "active")
+			aA[i].setAttribute("class", "active");
 		}, false);
 	}
 }
+
+//lend
+let lendBookClick = (readerId) => {
+	let lendBtn = document.querySelector(".lendable");
+	
+	lendBtn.addEventListener("click", function() {
+		if(readerId != null){
+			let bookId = this.getAttribute("bid");
+			window.location.href=`lendBook.action?readerId=${readerId}&bookId=${bookId}`; 
+		}else{
+			alert("请先进行登录！！！");
+		}
+	}, false);
+}
+
+//lendResult
+let getBookResult = ()=>{
+	var tab = GetQueryString("tab");
+	var oDiv = document.querySelector(".resultBox");
+	
+	switch (tab) {
+		case '1':
+			oDiv.innerHTML = `<p>借书成功！页面将在3秒后跳转至我的个人中心，如未跳转，请<a onClick = "window.location.href='Home.jsp' ">点击这里</a>手动跳转</p>`
+			setTimeout(function() {
+				window.location.href='Home.jsp';
+			}, 3000);
+			break;
+		case '2':
+			oDiv.innerHTML = `<p>借书失败！您已经借过该书且还未还，页面将在3s后返回，如未跳转，请<a onClick = "window.history.back(-1);">点击这里</a>手动跳转</p>`
+			setTimeout(function() {
+				window.history.back(-1);
+			}, 3000);
+			break;
+		case '0':
+			oDiv.innerHTML = `<p>借书失败！您已经借了很多书了，清先看完在借，页面将在3s后返回，如未跳转，请<a onClick = "window.history.back(-1);">点击这里</a>手动跳转</p>`
+			setTimeout(function() {
+				window.history.back(-1);
+			}, 3000);
+			break;
+		default:
+			oDiv.innerHTML = `<p>借书失败！页面将在3s后返回，如未跳转，请<a onClick = "window.history.back(-1);">点击这里</a>手动跳转</p>`
+			setTimeout(function() {
+				window.history.back(-1);
+			}, 3000);
+	}
+}
+
+//returnBook
+let returnBook = (readerId) => {
+	let tbody = document.querySelector(".borrowbook-detail");
+	let aList = tbody.querySelectorAll(".return");
+	
+	console.log(aList);
+	
+	for(let i = 0; i < aList.length; i++){
+		aList[i].addEventListener("click", function() {
+			let bookId = this.getAttribute("bookId");
+			console.log(bookId);//
+		}, false);
+	}
+}
+
+//借阅信息清单列表
+let MyBookListClick = (baseUrl, readerId)=>{
+	let mybookList = document.querySelector(".MyBookList");
+	let aList = mybookList.querySelectorAll("a");
+	for(let i = 0; i < aList.length; i++){
+		aList[i].addEventListener("click", function() {
+			var tab = this.getAttribute("tab");
+			//console.log(cid);
+			getBorrowInfo(baseUrl, readerId, tab);
+			
+			//选中a active标记
+			for(let j = 0; j < aList.length; j++){
+				aList[j].setAttribute("class", "");
+			}
+			aList[i].setAttribute("class", "active");
+		}, false);
+	}
+	
+}
+
 
 /*
  * tool function
@@ -397,6 +692,18 @@ Date.prototype.Format = function(fmt) {
     if (new RegExp("(" + k + ")").test(fmt))
         fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
+}
+//日期比较
+function lateDate(date1,date2){
+    var oDate1 = new Date(date1);
+    var oDate2 = new Date(date2);
+    if(oDate1.getTime() > oDate2.getTime()){
+        //console.log('第一个大');
+        return false;
+    } else {
+        //console.log('第二个大');
+        return true;
+    }
 }
 
 //获取url参数

@@ -170,6 +170,29 @@
   justify-content: space-between;
 }
 .userContent .uerInfo .book-table tbody img{
-  width: 70%;
-  height: 70%;
+  width: 140px;
+  height: 140px;
+}
+.uerInfo .MyBookList .active{
+	color: #f30213;
+}
+
+.resultBoxWrap {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+  align-items: center;
+	width:1200px;
+	margin: 0 auto;
+}
+.resultBox p{
+	padding-top: 80px;
+	flex:1;
+	height: 200px;
+	text-align: center;
+	width: 400px;
+	border: 1px solid #333;
+}
+.resultBox p a{
+	color: red;
 }

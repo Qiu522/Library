@@ -21,12 +21,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!--webfont-->
+ <script src="js/init.js"></script>
  <script type="text/javascript">
+ 		var baseUrl='${pageContext.request.contextPath}';
+ 		var readerId = 1;
+ 		var tab = 1;
 		jQuery(document).ready(function($) {
 			$(".scroll").click(function(event){		
 				event.preventDefault();
 				$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
 			});
+				getBorrowInfo(baseUrl, readerId, tab);
+				MyBookListClick(baseUrl, readerId);
+			
+			
 		});
 	</script>
 </head>
@@ -46,50 +54,40 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<h3><span>书籍</span>是人类进步的阶梯！</h3>
 		</div>
 	</div>
+	<div class="container">
+			<div class="nav_content">
+				<div class="home">
+					<a href="index.jsp"><img src="images/home.png" alt="" /></a>
+				</div>
+			</div>
+	</div>
 	<div class="userContent">
 		<div class="uerInfo">
       <div class="user-title">
-        <h3><span>我</span>的个人信息</h3>
+        
       </div>
       <div class="user-content">
-        <ul>
-          <li>
-            <h4>年龄</h4>
-            <span>18</span>
-          </li>
-          <li>
-            <h4>性别</h4>
-            <span>男</span>
-          </li>
-          <li>
-            <h4>账户余额</h4>
-            <span>0.00</span>
-          </li>
-          <li>
-            <h4>剩余借书量</h4>
-            <span>6</span>
-          </li>
-        </ul>
+        
       </div>
       <div class="MyBookList">
         <div class="menu">
 					<ul>						
 						<li>
-              <a>
+              <a class="active" tab="1">
                 <div class="glyphicon glyphicon-time"></div>
-                已借图书
+                	已借图书
               </a>
             </li>
 						<li>
-              <a>
+              <a tab="2">
                 <div class="glyphicon glyphicon-exclamation-sign"></div>
-                历史逾期
+              	  历史逾期
               </a>
             </li>
 						<li>
-              <a>
+              <a tab="3">
                 <div class="glyphicon glyphicon-list-alt"></div>
-                所有记录
+                	所有记录
               </a>
             </li>
 					</ul>
@@ -97,15 +95,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div>
           <table class="book-table">
             <thead>
-              <tr>
+              <!-- <tr>
                 <th>图书信息</th>
                 <th>借书时间</th>
                 <th>还书时间</th>
                 <th>是否逾期</th>
-              </tr>
+              </tr> -->
             </thead>
-            <tbody>
-              <tr>
+            <tbody class="borrowbook-detail">
+              <!-- <tr>
                 <th>
                   <div class="book-img">
                     <a><img src="./images/book1.jpg"></a>
@@ -118,21 +116,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <th>借书时间</th>
                 <th>还书时间</th>
                 <th>是否逾期</th>
-              </tr>
-              <tr>
-                  <th>
-                    <div class="book-img">
-                      <a><img src="./images/book1.jpg"></a>
-                    </div>
-                    <div class="book-detail">
-                      <h3>老人与海</h3>
-                      <p>作者：<span>海明威</span></p>
-                    </div>
-                  </th>
-                  <th>借书时间</th>
-                  <th>还书时间</th>
-                  <th>是否逾期</th>
-                </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -183,4 +167,4 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 </body>
 </html>
-</html>
+

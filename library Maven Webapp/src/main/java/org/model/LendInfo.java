@@ -17,6 +17,9 @@ public class LendInfo {
 	private Date deadLine;
 	private int hasCharge = 0;
 	
+	//
+	private Book book;
+	
 	//定义借书期限
 	private int timeLimite = 90;
 	
@@ -67,6 +70,12 @@ public class LendInfo {
 	}
 	public void setTimeLimite(int timeLimite) {
 		this.timeLimite = timeLimite;
+	}
+	public Book getBook() {
+		return book;
+	}
+	public void setBook(Book book) {
+		this.book = book;
 	}
 	
 	

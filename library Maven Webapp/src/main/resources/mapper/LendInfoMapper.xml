@@ -19,8 +19,20 @@
 	  values (#{readerId},#{bookId},#{lendDate},#{deadLine},#{hasCharge});
 	</insert>
 	
+	<select id="queryAllByReaderId" resultMap="testResultMap">
+		select * from lend_info where reader_id = #{readerId};
+	</select>
+	
 	<select id="queryLendInfoByReaderId" resultMap="testResultMap">
 		select * from lend_info where return_date is NULL and reader_id = #{readerId};
 	</select>
-
+	
+	<select id="queryLateBorrowByReaderId" resultMap="testResultMap">
+		select * from lend_info where return_date is not NULL and reader_id = #{readerId};
+	</select>
+	
+	<select id="queryOneLendInfo" resultMap="testResultMap">
+		select * from lend_info where return_date is not NULL and reader_id = #{readerId} and book_id = #{bookId};
+	</select>
+	
 </mapper>

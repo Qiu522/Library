@@ -1,5 +1,6 @@
 package org.service.impl;
 
+import java.io.Console;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -77,11 +78,66 @@ public class LendInfoServiceImpl implements LendInfoService{
 		return 0;
 	}
 	
+	/*
+	 * 首先确定用户是否逾期还书，
+	 * 若有 判断逾期天数，插入逾期信息
+	 * 	更新用户余额 acount
+	 * 	
+	 * 更新借书状态 插入 return date 
+	 * 用户acount--
+	 * 图书remain++
+	 * 
+	 * result 1:还书成功  0：还书失败 
+	 * */
+	@Override
+	public int updateLendInfo(int readerId, int bookId) {
+		// TODO Auto-generated method stub
+		LendInfo lendInfo = queryOneLendInfo(readerId, bookId);
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		String s_date = df.format(new Date());
+		Date returnDate =null;
+		long diff = 0;
+		int days = 0;
+		
+		try {
+			returnDate = df.parse(s_date);
+			diff = returnDate.getTime() - lendInfo.getDeadLine().getTime();
+			days = (int)( diff / (1000 * 60 * 60 * 24) );
+			System.out.println(days);
+			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if( days > 0){ //逾期 
+			
+		}
+		
+		
+		
+		return 0;
+	}
+	
 	@Override
 	public List<LendInfo> queryLendInfoByReaderId(int readerId) {
 		return lendInfoDao.queryLendInfoByReaderId(readerId);
 	}
+
+	@Override
+	public List<LendInfo> queryLateBorrowByReaderId(int readerId) {
+		return lendInfoDao.queryLateBorrowByReaderId(readerId);
+	}
+
+	@Override
+	public List<LendInfo> queryAllByReaderId(int readerId) {
+		return lendInfoDao.queryAllByReaderId(readerId);
+	}
 	
+	@Override
+	public LendInfo queryOneLendInfo(int readerId, int bookId) {
+		return lendInfoDao.queryOneLendInfo(readerId, bookId);
+	}
 	
 	//追加日期
 	public static Date addDate(Date date,long day) throws ParseException {

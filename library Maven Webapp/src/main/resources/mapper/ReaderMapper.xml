@@ -15,14 +15,13 @@
   </resultMap>
 	
 	<select id="queryReaderById" parameterType="Integer" resultType="org.model.Reader">
-		select * from reader where id = #{id}
+		select id,readername,age,sex,acount,bookcount from reader where id = #{id};
 	</select>
 	
 	<update id="updateReader" parameterType="org.model.Reader">
 		update reader
 		<set>
 			 <if test="readerName != null">readername =  #{readerName},</if>
-			 <if test="password != null">password = #{password},</if>
 			 <if test="age != null">age = #{age},</if>
 			 <if test="sex != null">sex = #{sex},</if>
 			 <if test="acount != null">acount = #{acount},</if>
