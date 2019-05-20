@@ -438,6 +438,7 @@ let createBorrowDetail = (tab, data, readerId)=>{
 	let thead = $("thead");
 	let tbody = $(".borrowbook-detail");
 	let oHTr = "";
+	let oTr = "";
 	thead.html("");
 	tbody.html("");
 	let oTab = parseInt(tab)
@@ -446,9 +447,9 @@ let createBorrowDetail = (tab, data, readerId)=>{
 		oHTr = `<tr>
 	        <th>图书信息</th>
 	        <th>借书时间</th>
-	        <th>还书时间</th>
+	        <th>到期时间</th>
 	        <th>是否逾期</th>
-	        <th>是否还书</th>
+	        <th>点击还书</th>
 	      </tr>`
 		thead.append(oHTr);
 		
@@ -456,7 +457,7 @@ let createBorrowDetail = (tab, data, readerId)=>{
 			let lenddata = new Date(data[i].lendDate).Format("yyyy-MM-dd");
 			let deaddata = new Date(data[i].deadLine).Format("yyyy-MM-dd");
 			
-			let oTr = `<tr>
+			oTr += `<tr>
 	                <th>
 	                  <div class="book-img">
 	                    <a><img src="${data[i].book.simgUrl}"></a>
@@ -471,8 +472,14 @@ let createBorrowDetail = (tab, data, readerId)=>{
 	                <th>${lateDate(lenddata , deaddata) ? "否" : "是" }</th>
 	                <th><a class="return" bookId="${data[i].book.id}">还书</a></th>
 	              </tr>`;
-			tbody.append(oTr);
+			
 		}
+		if(data.length == 0){
+			oTr += `<tr>
+                <th>暂无借书信息</th>
+              </tr>`;
+		}
+		tbody.append(oTr);
 		returnBook(readerId);
 		break;
 	case 2:
@@ -488,7 +495,7 @@ let createBorrowDetail = (tab, data, readerId)=>{
 			let lenddata = new Date(data[i].lendDate).Format("yyyy-MM-dd");
 			let deaddata = new Date(data[i].deadLine).Format("yyyy-MM-dd");
 			
-			let oTr = `<tr>
+			oTr += `<tr>
 	                <th>
 	                  <div class="book-img">
 	                    <a><img src="${data[i].book.simgUrl}"></a>
@@ -502,8 +509,13 @@ let createBorrowDetail = (tab, data, readerId)=>{
 	                <th>${ deaddata }</th>
 	                <th>${lateDate(lenddata , deaddata) ? "否" : "是" }</th>
 	              </tr>`;
-			tbody.append(oTr);
 		}
+		if(data.length == 0){
+			oTr += `<tr>
+                <th>暂无逾期信息，请继续保持</th>
+              </tr>`;
+		}
+		tbody.append(oTr);
 		break;
 	case 3:
 		oHTr = `<tr>
@@ -516,9 +528,10 @@ let createBorrowDetail = (tab, data, readerId)=>{
 		
 		for(let i = 0; i < data.length; i++){
 			let lenddata = new Date(data[i].lendDate).Format("yyyy-MM-dd");
-			let deaddata = new Date(data[i].deadLine).Format("yyyy-MM-dd");
+			let deaddata = new Date(data[i].deaddata).Format("yyyy-MM-dd");
+			let returnDate = data[i].returnDate != null ? new Date(data[i].returnDate).Format("yyyy-MM-dd") : null;
 			
-			let oTr = `<tr>
+			oTr += `<tr>
 	                <th>
 	                  <div class="book-img">
 	                    <a><img src="${data[i].book.simgUrl}"></a>
@@ -529,11 +542,16 @@ let createBorrowDetail = (tab, data, readerId)=>{
 	                  </div>
 	                </th>
 	                <th>${ lenddata }</th>
-	                <th>${ deaddata }</th>
+	                <th>${ returnDate != null ? returnDate : `未还` }</th>
 	                <th>${lateDate(lenddata , deaddata) ? "否" : "是" }</th>
 	              </tr>`;
-			tbody.append(oTr);
 		}
+		if(data.length == 0){
+			oTr += `<tr>
+                <th>暂无借书信息</th>
+              </tr>`;
+		}
+		tbody.append(oTr);
 		break;
 	default:
 		break;
@@ -611,8 +629,20 @@ let getBookResult = ()=>{
 				window.history.back(-1);
 			}, 3000);
 			break;
-		case '0':
-			oDiv.innerHTML = `<p>借书失败！您已经借了很多书了，清先看完在借，页面将在3s后返回，如未跳转，请<a onClick = "window.history.back(-1);">点击这里</a>手动跳转</p>`
+		case '3':
+			oDiv.innerHTML = `<p>还书成功！您已经在规定时间还书，页面将在3s后返回，如未跳转，请<a onClick = "window.history.back(-1);">点击这里</a>手动跳转</p>`
+			setTimeout(function() {
+				window.history.back(-1);
+			}, 3000);
+			break;
+		case '4':
+			oDiv.innerHTML = `<p>还书成功！您已经逾期了，逾期信息在我的个人中心查看，页面将在3s后返回，如未跳转，请<a onClick = "window.history.back(-1);">点击这里</a>手动跳转</p>`
+			setTimeout(function() {
+				window.history.back(-1);
+			}, 3000);
+			break;
+		case '-1':
+			oDiv.innerHTML = `<p>还书失败！页面将在3s后返回，如未跳转，请<a onClick = "window.history.back(-1);">点击这里</a>手动跳转</p>`
 			setTimeout(function() {
 				window.history.back(-1);
 			}, 3000);
@@ -635,7 +665,9 @@ let returnBook = (readerId) => {
 	for(let i = 0; i < aList.length; i++){
 		aList[i].addEventListener("click", function() {
 			let bookId = this.getAttribute("bookId");
-			console.log(bookId);//
+			
+			window.location.href=`returnBook.action?readerId=${readerId}&bookId=${bookId}`; 
+			
 		}, false);
 	}
 }

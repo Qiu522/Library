@@ -28,11 +28,21 @@
 	</select>
 	
 	<select id="queryLateBorrowByReaderId" resultMap="testResultMap">
-		select * from lend_info where return_date is not NULL and reader_id = #{readerId};
+		select * from lend_info where hasCharge=1 and reader_id = #{readerId};
 	</select>
 	
 	<select id="queryOneLendInfo" resultMap="testResultMap">
-		select * from lend_info where return_date is not NULL and reader_id = #{readerId} and book_id = #{bookId};
+		select * from lend_info where return_date is NULL and reader_id = #{readerId} and book_id = #{bookId};
 	</select>
+	
+	<update id="updateLendInfo" parameterType="org.model.LendInfo">
+		update lend_info
+		<set>
+			 <if test="returnDate != null">return_date =  #{returnDate},</if> 
+			 <if test="deadLine != null">deadline = #{deadLine},</if>
+			 <if test="hasCharge != null">hascharge = #{hasCharge}</if>
+		</set>
+		where reader_id = #{readerId} and book_id = #{bookId}; 
+	</update>
 	
 </mapper>

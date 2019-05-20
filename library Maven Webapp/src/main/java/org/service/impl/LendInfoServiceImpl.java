@@ -8,9 +8,11 @@ import java.util.List;
 
 import org.dao.LendInfoDao;
 import org.model.Book;
+import org.model.ChargeInfo;
 import org.model.LendInfo;
 import org.model.Reader;
 import org.service.BookService;
+import org.service.ChargeInfoService;
 import org.service.LendInfoService;
 import org.service.ReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ public class LendInfoServiceImpl implements LendInfoService{
 	@Autowired LendInfoDao lendInfoDao;
 	@Autowired ReaderService readerService;
 	@Autowired BookService bookService;
+	@Autowired ChargeInfoService chargeInfoService;
 	
 	/*
 	 * 首先确定用户可以借书否，bookcount - acount != 0
@@ -93,6 +96,9 @@ public class LendInfoServiceImpl implements LendInfoService{
 	public int updateLendInfo(int readerId, int bookId) {
 		// TODO Auto-generated method stub
 		LendInfo lendInfo = queryOneLendInfo(readerId, bookId);
+		Reader reader = readerService.queryReaderById(readerId);
+		Book book = bookService.queryOneBook(bookId);
+		
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String s_date = df.format(new Date());
 		Date returnDate =null;
@@ -111,12 +117,39 @@ public class LendInfoServiceImpl implements LendInfoService{
 		}
 		
 		if( days > 0){ //逾期 
+			ChargeInfo chargeInfo = new ChargeInfo();
+			chargeInfo.setReaderID(readerId);
+			chargeInfo.setBookId(bookId);
+			chargeInfo.setChargeDate(days);
+			chargeInfo.setFee( chargeInfo.getUnitPrice() * days );
 			
+			chargeInfoService.insertChargeInfo(chargeInfo);//插入逾期扣费表
+			
+			lendInfo.setReturnDate(returnDate); 
+			lendInfo.setHasCharge(1);
+			lendInfoDao.updateLendInfo(lendInfo);//更新借书表
+			reader.setBookCount(reader.getBookCount() - 1);//借书数加1
+			readerService.updateReader(reader);
+			System.out.println("用户信息更新成功");
+	        book.setRemain(book.getRemain() + 1); //图书剩余减1
+	        bookService.updateBook(book);
+			System.out.println("图书信息更新成功");
+	        
+	        return 2;
+			
+		}else{//未逾期
+			lendInfo.setReturnDate(returnDate); 
+			lendInfoDao.updateLendInfo(lendInfo);//更新还书时间
+			reader.setBookCount(reader.getBookCount() - 1);//借书数加1
+			readerService.updateReader(reader);
+			System.out.println("用户信息更新成功");
+	        book.setRemain(book.getRemain() + 1); //图书剩余减1
+	        bookService.updateBook(book);
+			System.out.println("图书信息更新成功");
+	        
+	        return 1;
 		}
 		
-		
-		
-		return 0;
 	}
 	
 	@Override

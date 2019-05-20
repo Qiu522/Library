@@ -169,7 +169,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</ul>
 	      </div>
 	      
-	      <div class="right_column">
+	       <!-- <div class="right_column"> 
 							<div class="item">
 								<header>
 									<h2 class="with-line">Categories</h2>
@@ -218,7 +218,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                </ul>
 	              </div>
 							<div class="clearfix"></div>
-						</div>
+				 </div> -->
 				</div>
 			</div>
 		</div>
@@ -262,6 +262,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 		</div>
-	<script src="js/bookanimation.js"></script>
   </body>
 </html>

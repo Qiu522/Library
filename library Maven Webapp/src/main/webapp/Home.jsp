@@ -31,6 +31,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				event.preventDefault();
 				$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
 			});
+				getReader(baseUrl, readerId);
 				getBorrowInfo(baseUrl, readerId, tab);
 				MyBookListClick(baseUrl, readerId);
 			

@@ -16,4 +16,6 @@ public interface LendInfoDao {
 	public LendInfo queryOneLendInfo(@Param("readerId") int readerId, @Param("bookId") int bookId);
 	//插入借书信息
 	public int insertLendInfo(LendInfo lendInfo);
+	//还书
+	public void updateLendInfo(LendInfo lendInfo); 
 }
