@@ -713,7 +713,7 @@ Date.prototype.Format = function(fmt) {
         "M+" : this.getMonth() + 1,
         "d+" : this.getDate(),
         "h+" : this.getHours(),
-        "m+" : this.getMinutes(),
+        "m+" : this.getMinutes( ),
         "s+" : this.getSeconds(),
         "q+" : Math.floor((this.getMonth() + 3) / 3),
         "S" : this.getMilliseconds()
