@@ -29,5 +29,18 @@
 		</set>
 		where id = #{id}; 
 	</update>
+	
+	<!-- 目的：为DAO接口方法提供sql语句配置 -->
+	<!-- 查询用户和密码进行登录 -->
+	<select id="findByReaderName" resultType="org.model.Reader">
 
+		select * from reader where readername = #{readerName}
+
+	</select>
+
+	<!--增加用户名和密码进行注册 -->
+	<insert id="registerByReaderNameAndPassword">
+		insert into reader (readername,password)
+		values (#{readerName},#{password})
+	</insert>
 </mapper>

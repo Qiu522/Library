@@ -20,5 +20,23 @@ public class ReaderServiceImpl implements ReaderService {
 		
 		return readerDao.updateReader(reader);
 	}
+	
+	//实现登陆
+		@Override
+		public Reader checkLogin(String readername, String password) {
+			Reader reader = readerDao.findByReaderName(readername);
+			if (reader != null && reader.getPassword().equals(password)) {
+				return reader;
+			}
+
+			return null;
+		}
+
+		//实现注册
+		@Override
+		public int Regist(String readername, String password) {
+			int n = readerDao.registerByReaderNameAndPassword(readername, password);
+			return n;
+		}
 
 }

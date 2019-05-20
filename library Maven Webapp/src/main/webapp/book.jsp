@@ -40,6 +40,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
 		});
 		
+		$.ajax({
+		type: "post",
+	    url: `\${baseUrl}/loading.action`,
+	    data: null,
+	    contentType: "application/json;charset=UTF-8", //发送数据的格式
+	    dataType: "json", //这是返回来是json，也就是回调json
+	    success: function(data){
+	    	console.log(data);
+	    	
+	    }
+	});
+		
 		var iniPageNum = 1;
 			console.log(pid);
 			getCategory(baseUrl, pid, false);
