@@ -8,8 +8,8 @@ public interface ReaderService {
 	public Reader queryReaderById(@Param("id") int id);
 	//用户数据更新
 	public int updateReader(Reader reader);
-	
+	//登录
 	Reader checkLogin(String readername, String password);
-	
+	//注册
 	int Regist(String readername, String password);
 }

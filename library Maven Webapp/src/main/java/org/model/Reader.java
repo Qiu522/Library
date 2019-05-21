@@ -59,5 +59,12 @@ public class Reader {
 	public void setTotalBookNum(int totalBookNum) {
 		this.totalBookNum = totalBookNum;
 	}
+	@Override
+	public String toString() {
+		return "Reader [id=" + id + ", readerName=" + readerName
+				+ ", password=" + password + ", age=" + age + ", sex=" + sex
+				+ ", acount=" + acount + ", bookCount=" + bookCount
+				+ ", totalBookNum=" + totalBookNum + "]";
+	}
 	
 }
