@@ -18,6 +18,10 @@
 		select id,readername,age,sex,acount,bookcount from reader where id = #{id};
 	</select>
 	
+	<select id="queryReaderByName" resultType="org.model.Reader">
+		select id,readername,age,sex,acount,bookcount from reader where readername = #{readerName};
+	</select>
+	
 	<update id="updateReader" parameterType="org.model.Reader">
 		update reader
 		<set>

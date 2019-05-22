@@ -40,17 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
 		});
 		
-		$.ajax({
-		type: "post",
-	    url: `\${baseUrl}/loading.action`,
-	    data: null,
-	    contentType: "application/json;charset=UTF-8", //发送数据的格式
-	    dataType: "json", //这是返回来是json，也就是回调json
-	    success: function(data){
-	    	console.log(data);
-	    	
-	    }
-	});
+		getReaderInfo();
 		
 		var iniPageNum = 1;
 			console.log(pid);
@@ -71,8 +61,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<a href="index.jsp"><img src="images/logo-l.png" alt="" /></a>
 				</div>
 				<div class="user-login">
-					<a href="#" class="link-login">您好！请登录</a>&nbsp;&nbsp;
-					<a href="#" class="link-regist">免费注册</a>
+					<a href="login.jsp" class="link-login">您好！请登录</a>&nbsp;&nbsp;
+					<a href="regist.jsp" class="link-regist">免费注册</a>
 				</div>
 				<div class="clearfix"></div>
 			</div>

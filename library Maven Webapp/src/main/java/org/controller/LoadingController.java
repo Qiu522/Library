@@ -17,12 +17,21 @@ public class LoadingController {
 	@RequestMapping("loading.action")
 	public @ResponseBody Reader loading(HttpServletRequest request){
 		HttpSession session = request.getSession();
+		Reader readerObj = null;
 		
-		Reader readerObj = (Reader)session.getAttribute("reader");
+		if(session.getAttribute("reader") != null){
+			readerObj = (Reader)session.getAttribute("reader");
+			if(readerObj != null){
+				readerObj.setPassword("");
+			}
+			System.out.println(readerObj);
+			return readerObj;
+		}
 		
-		readerObj.setPassword("");
-		System.out.println(readerObj.getId());
-		return readerObj;
+		
+		
+		
+		return null;
 		
 	}
 }

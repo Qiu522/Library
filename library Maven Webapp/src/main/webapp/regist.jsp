@@ -29,16 +29,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="layui-form">
 						<div class="layui-form-item">
 							<input class="layui-input" id="readername" placeholder="请输入用户名" type="text" >
+							<p id="name-tip" class="tipHidden"></p>
 						</div>
 						<div class="layui-form-item">
 							<input class="layui-input" id="password" placeholder="请输入密码" type="password">
+							<p id="pass-tip" class="tipHidden"></p>
 						</div>
 						<div class="layui-form-item">
 							<input class="layui-input" id="repassword" placeholder="请再次输入密码" type="password" maxlength="20" >
+							<p id="repass-tip" class="tipHidden"></p>
 						</div>
 						<div class="layui-form-item form_code">
 							<input id="code" class="layui-input" placeholder="请输入图片验证码" type="text" maxlength="4">
 							<div class="code"><img src="checkCode.action" id="refCode_Regist_img" class="passcode" style="height:38px; width:110px;cursor:pointer;"></div>
+							<p id="tip" class="tipHidden"></p>
 						</div>
 						
 						<div class="layui-form-item" style="float: left;margin-left: -10px;">

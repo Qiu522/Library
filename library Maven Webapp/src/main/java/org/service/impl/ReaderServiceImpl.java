@@ -39,4 +39,9 @@ public class ReaderServiceImpl implements ReaderService {
 			return n;
 		}
 
+		@Override
+		public Reader queryReaderByName(String readerName) {
+			return readerDao.queryReaderByName(readerName);
+		}
+
 }

@@ -14,11 +14,11 @@
 	
 	<insert id="insertChargeInfo" parameterType="org.model.LendInfo" useGeneratedKeys="true" keyProperty="id">
 	  insert into charge_info (reader_id, book_id, charge_date, fee)
-	  values (#{readerId},#{bookId},#{chargeDate},#{fee});
+	  values (#{readerID},#{bookId},#{chargeDate},#{fee});
 	</insert>
 	
 	<select id="queryAllByReaderId" resultMap="testResultMap">
-		select * from charge_info where reader_id = #{readerId};
+		select * from charge_info where reader_id = #{readerID};
 	</select>
 	
 </mapper>

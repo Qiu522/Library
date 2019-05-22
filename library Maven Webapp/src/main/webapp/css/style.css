@@ -105,10 +105,16 @@ i.rss:hover{
   align-items: center;
 	
 }
+.user-login p{
+	color: #fff;
+}
 .link-login {
 	color: #f30213;
 }
 .link-regist{
+	color: #999;
+}
+.exit {
 	color: #999;
 }
 /*--start-search--*/

@@ -129,6 +129,7 @@ public class LendInfoServiceImpl implements LendInfoService{
 			lendInfo.setHasCharge(1);
 			lendInfoDao.updateLendInfo(lendInfo);//更新借书表
 			reader.setBookCount(reader.getBookCount() - 1);//借书数加1
+			reader.setAcount( reader.getAcount() - chargeInfo.getFee() );
 			readerService.updateReader(reader);
 			System.out.println("用户信息更新成功");
 	        book.setRemain(book.getRemain() + 1); //图书剩余减1

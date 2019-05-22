@@ -23,19 +23,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--webfont-->
  <script src="js/init.js"></script>
  <script type="text/javascript">
+	 jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
+				});
  		var baseUrl='${pageContext.request.contextPath}';
- 		var readerId = 1;
+ 		let readerId =null;
  		var tab = 1;
-		jQuery(document).ready(function($) {
-			$(".scroll").click(function(event){		
-				event.preventDefault();
-				$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
-			});
-				getReader(baseUrl, readerId);
-				getBorrowInfo(baseUrl, readerId, tab);
-				MyBookListClick(baseUrl, readerId);
-			
-			
+ 		/* var readerId = GetQueryString("rid");
+ 		console.log(readerId); */
+ 		$.ajax({
+		type: "post",
+	    url: `loading.action`,
+	    data: null,
+	    contentType: "application/json;charset=UTF-8", //发送数据的格式
+	    dataType: "json", //这是返回来是json，也就是回调json
+	    success: function(data){
+	    	console.log(data);
+	    	if(data!=null){
+	    		readerId = data.id;
+	    		getReader(baseUrl, readerId);
+					getBorrowInfo(baseUrl, readerId, tab);
+					MyBookListClick(baseUrl, readerId);
+	    	}
+	    }
+		});		
 		});
 	</script>
 </head>

@@ -1,4 +1,4 @@
-﻿.user {
+.user {
 	width: 330px;
 	margin: 0 auto;
 	margin-top: 3%;
@@ -45,4 +45,12 @@ a:hover {
 
 .login_btn {
 	width: 100%;
+}
+
+.tipHidden{
+	display: none;
+}
+#name-tip, #pass-tip, #repass-tip{
+	color:red; 
+	text-align: left;
 }

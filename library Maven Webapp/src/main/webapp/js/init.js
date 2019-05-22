@@ -1,6 +1,24 @@
 /*
  * ajax function
  * */
+let getReaderInfo = ()=>{
+	
+	$.ajax({
+		type: "post",
+	    url: `${baseUrl}/loading.action`,
+	    data: null,
+	    contentType: "application/json;charset=UTF-8", //发送数据的格式
+	    dataType: "json", //这是返回来是json，也就是回调json
+	    success: function(data){
+	    	console.log(data);
+	    	if(data!=null){
+	    		loginUserInfo(data);
+	    	}
+	    }
+	});
+	
+}
+
 //图书列表信息请求
 let getCategory = (baseUrl, pid, hasChild) =>{
 	$.ajax({
@@ -133,6 +151,15 @@ let getBorrowInfo = (baseUrl, readerId, tab)=>{
 /*
  * page init function
  * */
+//生成用户登录
+let loginUserInfo = (data)=>{
+	var userLogin = document.querySelector(".user-login");
+	console.log(data);
+	userLogin.innerHTML = `
+				<p>欢迎回来！<a href="Home.jsp?rid=${data.id}" class="link-login" rid = ${data.id}>${data.readerName}</a> <a href="exit.action" class="exit">【 退出 】</a>  </P>`;
+}
+
+
 //生成图书列表
 let createCategory =  (data, action, hasChild, pid) => {
 	//console.log(data);
@@ -281,7 +308,12 @@ let createBookDetail = (baseUrl, data) => {
 	detailContent.innerHTML += itemDiv;
 	
 	//TODO
-	let readerId = 1;
+	let user = document.querySelector(".link-login");
+	let readerId = null;
+	if(user != null){
+		readerId = user.getAttribute("rid");
+	}
+	console.log(readerId);
 	lendBookClick(readerId);
 	
 }

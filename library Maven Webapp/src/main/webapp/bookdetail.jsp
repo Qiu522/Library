@@ -31,7 +31,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			event.preventDefault();
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
 		});
-		
+		getReaderInfo();
 		var id = GetQueryString("id");
 		//console.log(id);
 		getBookDetail(baseUrl, id);
@@ -46,8 +46,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <a href="index.jsp"><img src="images/logo-l.png" alt="" /></a>
 			</div>
 			<div class="user-login">
-				<a href="#" class="link-login">您好！请登录</a>&nbsp;&nbsp;
-				<a href="#" class="link-regist">免费注册</a>
+				<a href="login.jsp" class="link-login">您好！请登录</a>&nbsp;&nbsp;
+				<a href="regist.jsp" class="link-regist">免费注册</a>
 			</div>
 			<div class="clearfix"></div>
 		</div>

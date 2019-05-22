@@ -21,4 +21,6 @@ public interface ReaderDao {
 	 */
 	int registerByReaderNameAndPassword(@Param("readerName") String readerName,
 			@Param("password") String password);
+
+	public Reader queryReaderByName(@Param("readerName") String readerName);
 }
