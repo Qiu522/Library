@@ -129,6 +129,7 @@
   border: 1px solid;
   border-spacing: 2px;
   border-color: grey;
+  margin-bottom: 50px;
 }
 .userContent .uerInfo .book-table  tr {
   display: flex;

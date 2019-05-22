@@ -14,7 +14,7 @@
         <result column="bookcount" property="bookCount"/>
   </resultMap>
 	
-	<select id="queryReaderById" parameterType="Integer" resultType="org.model.Reader">
+	<select id="queryReaderById" parameterType="Integer"  resultType="org.model.Reader">
 		select id,readername,age,sex,acount,bookcount from reader where id = #{id};
 	</select>
 	

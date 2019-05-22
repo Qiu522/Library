@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dao.ChangeInfoDao">
+
+	<!-- 目的：为DAO接口方法提供sql语句配置 -->
+	<!-- 更改用户信息 -->
+	<update id="updateInfo" parameterType="org.model.Reader">
+
+		update reader set readername=#{readerName},age=#{age},sex=#{sex} where id=#{id};
+	</update>
+
+	
+	<update id="updatePassword" parameterType="org.model.Reader">
+		update reader set password= #{password} where id=#{id}
+	</update>
+	
+	<select id="queryByReaderName" resultType="org.model.Reader">
+		select * from reader where readername=#{readerName} and id != #{id}
+	</select>
+</mapper>

@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
+//这里用了@SessionAttributes，可以直接把model中的reader(也就key)放入其中
+//这样保证了session中存在user这个对象
 @Controller
-// 这里用了@SessionAttributes，可以直接把model中的reader(也就key)放入其中
-// 这样保证了session中存在user这个对象
-
 public class ReaderLRController {
 	@Autowired
 	private ReaderService readerServivce;

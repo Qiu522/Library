@@ -413,7 +413,7 @@ let createreaderDetail = (data, readerId)=>{
 	let uerInfo = document.querySelector(".uerInfo");
 	let userTitle = uerInfo.querySelector(".user-title");
 	let userContent = uerInfo.querySelector(".user-content");
-	userTitle.innerHTML += `<h3><i> ${data.readerName} </i>的个人信息</h3>`;
+	userTitle.innerHTML += `<h3><i> ${data.readerName}</i>的个人信息&nbsp;&nbsp;&nbsp;<a href="HomeUpdate.jsp" class="glyphicon glyphicon-edit" title="修改个人信息"></a></h3>`;
 	
 	userContent.innerHTML += `<ul>
 						          <li>
@@ -422,7 +422,7 @@ let createreaderDetail = (data, readerId)=>{
 						          </li>
 						          <li>
 						            <h4>性别</h4>
-						            <span>${data.sex == 1 ? '男' : '女'}</span>
+						            <span>${data.sex == 0 ? '男' : '女'}</span>
 						          </li>
 						          <li>
 						            <h4>账户余额</h4>

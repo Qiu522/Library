@@ -1,0 +1,71 @@
+.readerUpdate{
+	height: 500px;
+}
+
+/* 信息修改表格 */
+#table-1{
+	margin: 0 auto;
+	text-align: center;
+	height: 220px;
+	width: 500px;
+}
+
+#table-1 thead th {
+	background-color: rgb(156, 186, 95);
+	color: #fff;
+	border-bottom-width: 0;
+}
+
+/* Column Style */
+#table-1 td {
+	color: #000;
+}
+/* Heading and Column Style */
+#table-1 tr,#table-1 th {
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(156, 186, 95);
+}
+
+/* Padding and font style */
+#table-1 td,#table-1 th {
+	padding: 5px 10px;
+	font-size: 12px;
+	font-family: Verdana;
+	font-weight: bold;
+}
+
+
+
+/* 修改密码表格 */
+#table-2{
+	margin: 0 auto;
+	text-align: center;
+	height: 220px;
+	width: 500px;
+}
+
+#table-2 thead th {
+	background-color: rgb(156, 186, 95);
+	color: #fff;
+	border-bottom-width: 0;
+}
+
+/* Column Style */
+#table-2 td {
+	color: #000;
+}
+/* Heading and Column Style */
+#table-2 tr,#table-2 th {
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(156, 186, 95);
+}
+
+/* Padding and font style */
+#table-2 td,#table-2 th {
+	padding: 5px 10px;
+	font-size: 12px;
+	font-family: Verdana;
+	font-weight: bold;
+}
